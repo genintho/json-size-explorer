@@ -174,6 +174,9 @@ console.log("======================");
 console.log("DUPLICATES KEY/VALUES");
 console.log("======================");
 
+console.log();
+console.log("Most Frequent Duplicates Key/Value");
+console.log("----------------------");
 table = new Table(
   Object.assign(
     {
@@ -184,10 +187,43 @@ table = new Table(
 );
 
 documentStats
-  .dupsValue()
+  .freqDupsValue()
   .slice(-program.items)
   .forEach(k => {
-    table.push([k, documentStats.keyValue[k], k.length, 0]);
+    const size = documentStats.keyValue[k] * (k.length - 3);
+    table.push([
+      k.length > 60 ? k.substr(0, 60) + "..." : k,
+      thousands(documentStats.keyValue[k]),
+      thousands(size),
+      documentStats.perc(size) + "%"
+    ]);
+  });
+console.log(table.toString());
+
+console.log();
+console.log();
+console.log("Biggest Duplicates Key/Value");
+console.log("----------------------");
+table = new Table(
+  Object.assign(
+    {
+      head: ["Value", "Count", "Total Size"]
+    },
+    tableConfig
+  )
+);
+
+documentStats
+  .biggestDupsValue()
+  .slice(-program.items)
+  .forEach(k => {
+    const size = documentStats.keyValue[k] * (k.length - 3);
+    table.push([
+      k.length > 60 ? k.substr(0, 60) + "..." : k,
+      thousands(documentStats.keyValue[k]),
+      thousands(size),
+      documentStats.perc(size) + "%"
+    ]);
   });
 console.log(table.toString());
 

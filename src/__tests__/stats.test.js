@@ -44,15 +44,29 @@ describe("Stats", () => {
     expect(s.perc(100)).toBe(42.7);
   });
 
-  test("dupsValue", () => {
+  test("freqDupsValue", () => {
     const s = new Stats(10);
     s.addKeyValue("b", 5);
     s.addKeyValue("a", 6);
     s.addKeyValue("a", 7);
+    s.addKeyValue("a", 7);
     s.addKeyValue("c", 1);
     s.addKeyValue("c", 2);
     s.addKeyValue("c", 2);
-    expect(s.dupsValue()).toEqual(["c@#@2"]);
+    s.addKeyValue("c", 2);
+    expect(s.freqDupsValue()).toEqual(["a@#@7", "c@#@2"]);
+  });
+
+  test("biggestDupsValue", () => {
+    const s = new Stats(10);
+    s.addKeyValue("b", 5);
+    s.addKeyValue("a", 6);
+    s.addKeyValue("aa", 7);
+    s.addKeyValue("aa", 7);
+    s.addKeyValue("cc", 1);
+    s.addKeyValue("c", 2);
+    s.addKeyValue("c", 2);
+    expect(s.biggestDupsValue()).toEqual(["c@#@2", "aa@#@7"]);
   });
 
   test("keySortedBySize", () => {

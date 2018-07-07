@@ -99,9 +99,36 @@ module.exports = class Stats {
   perc(nb) {
     return Math.floor((nb / this.totalLength) * 1000) / 10;
   }
-  dupsValue() {
-    return Object.keys(this.keyValue).filter(el => {
+  freqDupsValue() {
+    const ks = Object.keys(this.keyValue).filter(el => {
       return this.keyValue[el] > 1;
     });
+    ks.sort((a, b) => {
+      const aL = this.keyValue[a];
+      const bL = this.keyValue[b];
+      if (aL > bL) {
+        return 1;
+      } else if (aL < bL) {
+        return -1;
+      }
+      return 0;
+    });
+    return ks;
+  }
+  biggestDupsValue() {
+    const ks = Object.keys(this.keyValue).filter(el => {
+      return this.keyValue[el] > 1;
+    });
+    ks.sort((a, b) => {
+      const aL = this.keyValue[a] * a.length;
+      const bL = this.keyValue[b] * b.length;
+      if (aL > bL) {
+        return 1;
+      } else if (aL < bL) {
+        return -1;
+      }
+      return 0;
+    });
+    return ks;
   }
 };
