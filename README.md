@@ -29,3 +29,12 @@ json-size-explorer --help
 
 ## Screenshot
 ![capture](img/capture.png)
+
+
+## Changelog
+
+
+### 1.0.2
+
+- Display the number of keys found in the document
+- Align data in the column to improve readability

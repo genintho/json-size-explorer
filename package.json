@@ -20,7 +20,7 @@
     "thousands": "^1.0.1",
     "update-notifier": "^2.5.0"
   },
-  "version": "1.0.0",
+  "version": "1.0.2",
   "bin": {
     "json-size-explorer": "./index.js"
   }
