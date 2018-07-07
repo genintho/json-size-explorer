@@ -79,4 +79,13 @@ describe("Stats", () => {
     s.addKeyValue("key", "aaaaaaaaaa");
     expect(s.valuesSortedBySize()).toEqual(["7", '"aaaaaaaaaa"']);
   });
+
+  test("nbOfKey", () => {
+    const s = new Stats(10);
+    s.addKeyValue("a", 7);
+    s.addKeyValue("a", 6);
+    s.addKeyValue("longer", "aaaaaaaaaa");
+    s.addKeyValue("key", "aaaaaaaaaa");
+    expect(s.nbOfKey()).toBe(4);
+  });
 });

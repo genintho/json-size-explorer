@@ -81,6 +81,12 @@ module.exports = class Stats {
     return ks;
   }
 
+  nbOfKey() {
+    return Object.keys(this.keys).reduce((ac, current) => {
+      return ac + this.keys[current];
+    }, 0);
+  }
+
   /**
    * Number of char used to store the key
    * @returns {number}

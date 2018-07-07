@@ -31,6 +31,7 @@ console.log();
 console.log("----------");
 console.log("Keys");
 console.log("----------");
+console.log(documentStats.nbOfKey(), "keys");
 console.log(
   "Key size",
   documentStats.keySize(),
