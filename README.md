@@ -33,6 +33,9 @@ json-size-explorer --help
 
 ## Changelog
 
+### 1.0.3
+
+- Improve display of Key/Value. This helps finding pure duplication
 
 ### 1.0.2
 
