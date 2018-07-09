@@ -2,6 +2,7 @@
   "name": "json-size-explorer",
   "version": "1.0.3",
   "scripts": {
+    "build": "rollup -c",
     "test": "node node_modules/.bin/jest",
     "test:watch": "node node_modules/.bin/jest --watch",
     "test:coverage": "node node_modules/.bin/jest --coverage",
@@ -10,7 +11,11 @@
   "devDependencies": {
     "coveralls": "3.0.2",
     "jest": "^23.1.0",
-    "prettier": "^1.13.5"
+    "prettier": "^1.13.5",
+    "rollup": "^0.60.0",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^4.0.0"
   },
   "dependencies": {
     "cli-table3": "^0.5.0",
@@ -28,7 +33,16 @@
   "author": "Thomas Genin <xt6.thomas.genin@gmail.com>",
   "repository": "https://github.com/genintho/json-size-explorer.git",
   "license": "MIT",
+  "main": "dist/json-size-explorer.cjs.js",
+  "module": "dist/json-size-explorer.esm.js",
+  "browser": "dist/json-size-explorer.js",
+  "browser.min": "dist/json-size-explorer.min.js",
   "bin": {
     "json-size-explorer": "./index.js"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "arrowParens": "always",
+    "tabWidth": 4
   }
 }
