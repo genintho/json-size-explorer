@@ -1,9 +1,13 @@
 # json-size-explorer
+
 Get insight about the content of your JSON documents.
 Find what is taking the most space. Find duplicates, key size, depth, etc
 
 ## Install
 `npm install -g json-size-explorer`
+
+## Badges 
+[![Coverage Status](https://coveralls.io/repos/github/genintho/json-size-explorer/badge.svg?branch=coverage_ci)](https://coveralls.io/github/genintho/json-size-explorer?branch=coverage_ci)
 
 ## Commands
 
