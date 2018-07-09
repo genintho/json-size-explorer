@@ -7,9 +7,8 @@ const thousands = require("thousands");
 updateNotifier({ pkg }).notify();
 
 const fs = require("fs");
-const main = require("./src/main");
 const program = require("commander");
-const Stats = require("./src/stats");
+const jsonSizeExplorer = require("./src/main");
 const Table = require("cli-table3");
 
 program
@@ -50,10 +49,7 @@ const tableConfig = {
 
 console.log("Processing", program.path);
 const raw = fs.readFileSync(program.path, { encoding: "utf-8" });
-const obj = JSON.parse(raw);
-const documentStats = new Stats(raw.length);
-
-main(obj, documentStats, "");
+const documentStats = jsonSizeExplorer(raw);
 
 console.log();
 console.log("======================");
