@@ -1,15 +1,14 @@
 {
   "name": "json-size-explorer",
-  "description": "Get insight of the size of your JSON documents",
-  "keywords": [
-    "json",
-    "size",
-    "explorer"
-  ],
-  "author": "Thomas Genin <xt6.thomas.genin@gmail.com>",
-  "repository": "https://github.com/genintho/json-size-explorer.git",
-  "license": "MIT",
+  "version": "1.0.3",
+  "scripts": {
+    "test": "node node_modules/.bin/jest",
+    "test:watch": "node node_modules/.bin/jest --watch",
+    "test:coverage": "node node_modules/.bin/jest --coverage",
+    "test:coverage:ci": "node node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
   "devDependencies": {
+    "coveralls": "3.0.2",
     "jest": "^23.1.0",
     "prettier": "^1.13.5"
   },
@@ -20,7 +19,15 @@
     "thousands": "^1.0.1",
     "update-notifier": "^2.5.0"
   },
-  "version": "1.0.3",
+  "description": "Get insight of the size of your JSON documents",
+  "keywords": [
+    "json",
+    "size",
+    "explorer"
+  ],
+  "author": "Thomas Genin <xt6.thomas.genin@gmail.com>",
+  "repository": "https://github.com/genintho/json-size-explorer.git",
+  "license": "MIT",
   "bin": {
     "json-size-explorer": "./index.js"
   }
