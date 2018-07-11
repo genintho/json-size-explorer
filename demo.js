@@ -1,12 +1,12 @@
 let NB_ITEMS = 5;
 let documentStats = null;
-document.getElementById("sub").onclick = () => {
-    const raw = document.getElementById("area").value;
+elId("sub").onclick = () => {
+    const raw = elId("area").value;
     documentStats = JSONSizeExplorer(raw);
     displayResults();
 };
 
-document.getElementById("nbItems").onchange = (e) => {
+elId("nbItems").onchange = (e) => {
     NB_ITEMS = e.target.value;
     displayResults();
 };
@@ -15,10 +15,22 @@ function displayResults() {
     if (!documentStats) {
         return;
     }
-    // const resElm = document.getElementById("res");
-    // resElm.innerText = documentStats.totalLength;
+    elId("general").innerText =
+        "Total document size " + thousands(documentStats.totalLength);
+    elId("keyStats").innerText =
+        "Number of keys: " +
+        thousands(documentStats.nbOfKey()) +
+        "Key size: " +
+        thousands(documentStats.keySize()) +
+        " - " +
+        documentStats.perc(documentStats.keySize()) +
+        "%";
     drawMostFrequentKeys();
     drawHeaviestKeys();
+    drawMostFrequentValues();
+    drawHeaviestValues();
+    drawMostFreqDup();
+    drawHeaviestDup();
 }
 
 function drawMostFrequentKeys() {
@@ -45,6 +57,58 @@ function drawHeaviestKeys() {
     });
 }
 
+function drawMostFrequentValues() {
+    drawTableBody("freqValue", "valuesSortedByCount", (k) => {
+        const size = documentStats.values[k].length * k.length;
+        return [
+            k.length > 60 ? k.substr(0, 60) + "..." : k,
+            thousands(documentStats.values[k].length),
+            thousands(size),
+            documentStats.perc(size) + "%",
+        ];
+    });
+}
+
+function drawHeaviestValues() {
+    drawTableBody("heavyValue", "valuesSortedBySize", (k) => {
+        const size = documentStats.values[k].length * k.length;
+        return [
+            k.length > 60 ? k.substr(0, 60) + "..." : k,
+            thousands(documentStats.values[k].length),
+            thousands(size),
+            documentStats.perc(size) + "%",
+        ];
+    });
+}
+
+function drawMostFreqDup() {
+    drawTableBody("dupFreq", "freqDupsValue", (k) => {
+        const size = documentStats.keyValue[k] * (k.length - 3);
+        return [
+            k.length > 60 ? k.substr(0, 60) + "..." : k,
+            thousands(documentStats.keyValue[k]),
+            thousands(size),
+            documentStats.perc(size) + "%",
+        ];
+    });
+}
+
+function drawHeaviestDup() {
+    drawTableBody("heavyDup", "biggestDupsValue", (k) => {
+        const size = documentStats.keyValue[k] * (k.length - 3);
+        return [
+            k.length > 60 ? k.substr(0, 60) + "..." : k,
+            thousands(documentStats.keyValue[k]),
+            thousands(size),
+            documentStats.perc(size) + "%",
+        ];
+    });
+}
+
+function elId(id) {
+    return document.getElementById(id);
+}
+
 function drawTableBody(containerID, method, processor) {
     let frag = document.createDocumentFragment();
     documentStats[method]()
@@ -55,8 +119,8 @@ function drawTableBody(containerID, method, processor) {
             frag.appendChild(tr);
         });
 
-    document.getElementById(containerID).innerHTML = "";
-    document.getElementById(containerID).appendChild(frag);
+    elId(containerID).innerHTML = "";
+    elId(containerID).appendChild(frag);
 }
 
 function buildRow(arr) {
