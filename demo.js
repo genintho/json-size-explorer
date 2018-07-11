@@ -13,7 +13,10 @@ function handleFileSelect(evt) {
     reader.onload = function() {
         processRaw(reader.result);
         setTimeout(() => {
-            elId("area").value = reader.result;
+            elId("area").value = "Inserting file content ...";
+            setTimeout(() => {
+                elId("area").value = reader.result;
+            }, 100);
         }, 0);
     };
 
@@ -41,6 +44,7 @@ function displayResults() {
     if (!documentStats) {
         return;
     }
+    elId("res").style.display = "block";
     elId("general").innerText =
         "Total document size " + thousands(documentStats.totalLength);
     elId("keyStats").innerText =
