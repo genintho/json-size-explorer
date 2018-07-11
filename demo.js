@@ -47,14 +47,16 @@ function displayResults() {
     elId("res").style.display = "block";
     elId("general").innerText =
         "Total document size " + thousands(documentStats.totalLength);
-    elId("keyStats").innerText =
-        "Number of keys: " +
-        thousands(documentStats.nbOfKey()) +
+    addToList("keyStats", [
+        "Number of keys: " + thousands(documentStats.nbOfKey()),
+        "Number of unique keys: " +
+            thousands(Object.keys(documentStats.keys).length),
         "Key size: " +
-        thousands(documentStats.keySize()) +
-        " - " +
-        documentStats.perc(documentStats.keySize()) +
-        "%";
+            thousands(documentStats.keySize()) +
+            " - " +
+            documentStats.perc(documentStats.keySize()) +
+            "%",
+    ]);
     drawMostFrequentKeys();
     drawHeaviestKeys();
     drawMostFrequentValues();
@@ -149,8 +151,9 @@ function drawTableBody(containerID, method, processor) {
             frag.appendChild(tr);
         });
 
-    elId(containerID).innerHTML = "";
-    elId(containerID).appendChild(frag);
+    const node = elId(containerID);
+    node.innerHTML = "";
+    node.appendChild(frag);
 }
 
 function buildRow(arr) {
@@ -169,4 +172,16 @@ function thousands(input) {
 
 function limitLen(input) {
     return input.length > 60 ? input.substr(0, 60) + "..." : input;
+}
+
+function addToList(containerId, items) {
+    const frag = document.createDocumentFragment();
+    items.forEach((item) => {
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(item));
+        frag.appendChild(li);
+    });
+    const node = elId(containerId);
+    node.innerHTML = "";
+    node.appendChild(frag);
 }
