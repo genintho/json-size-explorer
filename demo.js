@@ -46,7 +46,7 @@ function displayResults() {
     }
     elId("res").style.display = "block";
     elId("general").innerText =
-        "Total document size " + thousands(documentStats.totalLength);
+        "Total document size: " + thousands(documentStats.totalLength);
     addToList("keyStats", [
         "Number of keys: " + thousands(documentStats.nbOfKey()),
         "Number of unique keys: " +
@@ -117,7 +117,7 @@ function drawMostFreqDup() {
     drawTableBody("dupFreq", "freqDupsValue", (k) => {
         const size = documentStats.keyValue[k] * (k.length - 3);
         return [
-            limitLen(k),
+            limitLen(k.replace("@#@", " = ")),
             thousands(documentStats.keyValue[k]),
             thousands(size),
             documentStats.perc(size) + "%",
@@ -129,7 +129,7 @@ function drawHeaviestDup() {
     drawTableBody("heavyDup", "biggestDupsValue", (k) => {
         const size = documentStats.keyValue[k] * (k.length - 3);
         return [
-            limitLen(k),
+            limitLen(k.replace("@#@", " = ")),
             thousands(documentStats.keyValue[k]),
             thousands(size),
             documentStats.perc(size) + "%",
