@@ -3,6 +3,10 @@
 Get insight about the content of your JSON documents.
 Find what is taking the most space. Find duplicates, key size, depth, etc
 
+## GUI
+
+http://everymscount.com/json-size-explorer/demo.html
+
 ## Install
 `npm install -g json-size-explorer`
 
