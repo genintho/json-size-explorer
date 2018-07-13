@@ -1,3 +1,8 @@
+/*!
+ * This code is not clearly not perfect neither is aimed at being perfect.
+ * It is works and is small. That's good enough for this project.
+ */
+
 let NB_ITEMS = 5;
 let documentStats = null;
 
@@ -8,15 +13,15 @@ function handleFileSelect(evt) {
         alert("Please select an JSON file");
         return;
     }
-    var reader = new FileReader();
+    const reader = new FileReader();
     // Closure to capture the file information.
     reader.onload = function() {
         processRaw(reader.result);
         setTimeout(() => {
-            elId("area").value = "Inserting file content ...";
-            setTimeout(() => {
-                elId("area").value = reader.result;
-            }, 100);
+            // elId("area").value = "Inserting file content ...";
+            // setTimeout(() => {
+            elId("area").value = reader.result;
+            // }, 100);
         }, 0);
     };
 
@@ -168,8 +173,9 @@ function buildRow(arr) {
     return tr;
 }
 
+const numFormator = new Intl.NumberFormat(navigator.language);
 function thousands(input) {
-    return new Intl.NumberFormat(navigator.language).format(input);
+    return numFormator.format(input);
 }
 
 function limitLen(input) {
