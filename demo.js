@@ -36,6 +36,7 @@ elId("nbItems").onchange = (e) => {
 };
 
 function processRaw(raw) {
+    elId("intro").hidden = true;
     documentStats = JSONSizeExplorer(raw);
     displayResults();
 }
@@ -44,7 +45,8 @@ function displayResults() {
     if (!documentStats) {
         return;
     }
-    elId("res").style.display = "block";
+    elId("res").hidden = false;
+    document.body.style.backgroundColor = "";
     elId("general").innerText =
         "Total document size: " + thousands(documentStats.totalLength);
     addToList("keyStats", [
