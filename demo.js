@@ -1,3 +1,8 @@
+/*!
+ * This code is not clearly not perfect neither is aimed at being perfect.
+ * It is works and is small. That's good enough for this project.
+ */
+
 let NB_ITEMS = 5;
 let documentStats = null;
 
@@ -8,15 +13,15 @@ function handleFileSelect(evt) {
         alert("Please select an JSON file");
         return;
     }
-    var reader = new FileReader();
+    const reader = new FileReader();
     // Closure to capture the file information.
     reader.onload = function() {
         processRaw(reader.result);
         setTimeout(() => {
-            elId("area").value = "Inserting file content ...";
-            setTimeout(() => {
-                elId("area").value = reader.result;
-            }, 100);
+            // elId("area").value = "Inserting file content ...";
+            // setTimeout(() => {
+            elId("area").value = reader.result;
+            // }, 100);
         }, 0);
     };
 
@@ -36,6 +41,7 @@ elId("nbItems").onchange = (e) => {
 };
 
 function processRaw(raw) {
+    elId("intro").hidden = true;
     documentStats = JSONSizeExplorer(raw);
     displayResults();
 }
@@ -44,9 +50,10 @@ function displayResults() {
     if (!documentStats) {
         return;
     }
-    elId("res").style.display = "block";
+    elId("res").hidden = false;
+    document.body.style.backgroundColor = "";
     elId("general").innerText =
-        "Total document size " + thousands(documentStats.totalLength);
+        "Total document size: " + thousands(documentStats.totalLength);
     addToList("keyStats", [
         "Number of keys: " + thousands(documentStats.nbOfKey()),
         "Number of unique keys: " +
@@ -117,7 +124,7 @@ function drawMostFreqDup() {
     drawTableBody("dupFreq", "freqDupsValue", (k) => {
         const size = documentStats.keyValue[k] * (k.length - 3);
         return [
-            limitLen(k),
+            limitLen(k.replace("@#@", " = ")),
             thousands(documentStats.keyValue[k]),
             thousands(size),
             documentStats.perc(size) + "%",
@@ -129,7 +136,7 @@ function drawHeaviestDup() {
     drawTableBody("heavyDup", "biggestDupsValue", (k) => {
         const size = documentStats.keyValue[k] * (k.length - 3);
         return [
-            limitLen(k),
+            limitLen(k.replace("@#@", " = ")),
             thousands(documentStats.keyValue[k]),
             thousands(size),
             documentStats.perc(size) + "%",
@@ -166,8 +173,9 @@ function buildRow(arr) {
     return tr;
 }
 
+const numFormator = new Intl.NumberFormat(navigator.language);
 function thousands(input) {
-    return new Intl.NumberFormat(navigator.language).format(input);
+    return numFormator.format(input);
 }
 
 function limitLen(input) {
