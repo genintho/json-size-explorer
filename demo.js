@@ -50,7 +50,7 @@ function displayResults() {
     if (!documentStats) {
         return;
     }
-    elId("res").hidden = false;
+    elId("result-summary").hidden = false;
     document.body.style.backgroundColor = "";
     elId("general").innerText =
         "Total document size: " + thousands(documentStats.totalLength);
