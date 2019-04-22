@@ -4,11 +4,12 @@ import * as _ from "lodash";
 
 export function drawExplorer(originalJSON: any, documentStats: Stats) {
     console.log(documentStats);
-    const root = elId("result-explorer");
-    root.hidden = false;
+    elId("result-explorer").hidden = false;
+
+    const root = elId("result-explorer-tree");
     drawList(originalJSON, documentStats, [], root);
+
     root.addEventListener("click", (event: any) => {
-        console.log(event);
         if (!event.target.classList.contains("sub")) {
             console.log("not sublist");
             return;
@@ -21,6 +22,39 @@ export function drawExplorer(originalJSON: any, documentStats: Stats) {
         const path = JSON.parse(event.target.dataset.path);
         drawList(originalJSON, documentStats, path, childrenRoot);
     });
+    root.addEventListener(
+        "mouseenter",
+        (event: any) => {
+            // console.log(event);
+            const el = elId("result-explorer-info");
+            const target = event.target;
+            if (!target.classList.contains("hover-info")) {
+                el.innerHTML = "";
+                return;
+            }
+            const path = JSON.parse(target.dataset.path);
+            const key = path[path.length - 1];
+
+            const ul = document.createElement("ul");
+            const list: string[] = [];
+
+            list.push(`Key '${key}' found ${documentStats.keys[key]}`);
+            list.push(
+                `${documentStats.keys[key]} x ${key.length} = ${documentStats
+                    .keys[key] * key.length}`
+            );
+
+            list.forEach((elem) => {
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(elem));
+                ul.appendChild(li);
+            });
+
+            el.innerHTML = "";
+            el.appendChild(ul);
+        },
+        true
+    );
 }
 
 function drawList(
@@ -38,14 +72,14 @@ function drawList(
         }
     }
     const keys = Object.keys(target);
+    const targetIsObject = _.isPlainObject(target);
     keys.sort();
     const ul = document.createElement("ul");
-    ul.classList.add("fa-ul");
     keys.forEach((key) => {
         const value = target[key];
         const valueSize = JSON.stringify({ [key]: value }).length - 2;
         const li = document.createElement("li");
-        li.classList.add("fa-li");
+        li.classList.toggle("hover-info", targetIsObject);
         let nodeText = documentStats.perc(valueSize) + "% - " + key;
         li.dataset.path = JSON.stringify(path.concat([key]));
 

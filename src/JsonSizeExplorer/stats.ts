@@ -111,7 +111,6 @@ export class Stats {
     }
 
     freqDupsValue() {
-        debugger;
         const ks = Object.keys(this.keyValue).filter((el) => {
             return this.keyValue[el] > 1;
         });
