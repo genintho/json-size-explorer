@@ -1,4 +1,4 @@
-import { elId } from "./DomUtils";
+import { elId, limitLen } from "./DomUtils";
 import { Stats } from "../JsonSizeExplorer/stats";
 
 const NB_ITEMS = 5;
@@ -156,10 +156,6 @@ function buildRow(arr: (string | number)[]) {
 const numFormator = new Intl.NumberFormat(navigator.language);
 function thousands(input: number) {
     return numFormator.format(input);
-}
-
-function limitLen(input: string) {
-    return input.length > 60 ? input.substr(0, 60) + "..." : input;
 }
 
 function addToList(containerId: string, items: string[]) {
