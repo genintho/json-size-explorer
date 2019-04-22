@@ -38,10 +38,14 @@ export function drawExplorer(originalJSON: any, documentStats: Stats) {
             const ul = document.createElement("ul");
             const list: string[] = [];
 
-            list.push(`Key '${key}' found ${documentStats.keys[key]}`);
             list.push(
-                `${documentStats.keys[key]} x ${key.length} = ${documentStats
-                    .keys[key] * key.length}`
+                `Key '${key}' found ${documentStats.keys[key]} in document`
+            );
+            list.push(
+                `${documentStats.keys[key]} x ${
+                    key.length
+                } (key length) = ${documentStats.keys[key] *
+                    key.length} bytes for the key itself`
             );
 
             list.forEach((elem) => {
