@@ -48,20 +48,20 @@ module.exports = {
         rules: [
             {
                 loader: "babel-loader",
-
-                options: {
-                    // plugins: ["syntax-dynamic-import"],
-
-                    presets: [
-                        [
-                            "@babel/preset-env",
-                            {
-                                modules: false,
-                            },
-                        ],
-                        "@babel/preset-typescript",
-                    ],
-                },
+                //
+                // options: {
+                //     // plugins: ["syntax-dynamic-import"],
+                //
+                //     presets: [
+                //         [
+                //             "@babel/preset-env",
+                //             {
+                //                 modules: false,
+                //             },
+                //         ],
+                //         "@babel/preset-typescript",
+                //     ],
+                // },
                 test: /\.(js|ts)$/,
             },
             {
