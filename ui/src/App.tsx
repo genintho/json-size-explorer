@@ -2,23 +2,33 @@ import React from "react";
 import "./App.css";
 import { Form } from "./Form";
 import { ResultsRoot } from "./ResultsRoot";
+import JSONSizeExplorer from "./JsonSizeExplorer/main";
+import { Stats } from "./JsonSizeExplorer/stats";
 
 interface iProps {}
 
 interface iState {
     rawJsonString: string;
+    jsonObj: any;
+    jsonStats: Stats;
 }
 
 export class App extends React.Component<iProps, iState> {
     constructor(propS: iProps) {
         super(propS);
+        const testObj = JSON.stringify({ a: 5, b: 56 });
+
         this.state = {
-            rawJsonString: "",
+            rawJsonString: testObj,
+            jsonObj: {},
+            jsonStats: JSONSizeExplorer(testObj),
         };
     }
 
     onSubmit(rawJsonString: string) {
-        this.setState({ rawJsonString });
+        const jsonStats = JSONSizeExplorer(rawJsonString);
+        const jsonObj = JSON.parse(rawJsonString);
+        this.setState({ rawJsonString, jsonStats, jsonObj });
     }
 
     render() {
@@ -27,7 +37,12 @@ export class App extends React.Component<iProps, iState> {
                 {this.state.rawJsonString.length === 0 && (
                     <Form onSubmit={this.onSubmit.bind(this)} />
                 )}
-                {this.state.rawJsonString.length !== 0 && <ResultsRoot />}
+                {this.state.rawJsonString.length !== 0 && (
+                    <ResultsRoot
+                        jsonObj={this.state.jsonObj}
+                        jsonStats={this.state.jsonStats}
+                    />
+                )}
             </div>
         );
     }
