@@ -38,15 +38,33 @@ export function drawExplorer(originalJSON: any, documentStats: Stats) {
             const ul = document.createElement("ul");
             const list: string[] = [];
 
+            const nbKey = documentStats.keys[key];
+            const sizeKEy = documentStats.keys[key] * key.length;
+            const disctinctValues = documentStats.distinctValue(key);
+            list.push(`Key '${key}' found ${nbKey} in document`);
             list.push(
-                `Key '${key}' found ${documentStats.keys[key]} in document`
-            );
-            list.push(
-                `${documentStats.keys[key]} x ${
+                `${nbKey} x ${
                     key.length
-                } (key length) = ${documentStats.keys[key] *
-                    key.length} bytes for the key itself`
+                } (key length) = ${sizeKEy} bytes for the key itself`
             );
+            list.push(
+                `This represent ${documentStats.perc(sizeKEy)}% of the document`
+            );
+            list.push(`Key has ${disctinctValues.length} distincts values`);
+
+            [0, 1].forEach((idx) => {
+                const distinct = disctinctValues[idx];
+                if (!distinct) {
+                    return;
+                }
+                list.push(
+                    `Value: ${limitLen(distinct.key)} is found ${
+                        distinct.count
+                    } times for a size of ${distinct.size} ${documentStats.perc(
+                        distinct.size
+                    )}`
+                );
+            });
 
             list.forEach((elem) => {
                 let li = document.createElement("li");
@@ -83,7 +101,9 @@ function drawList(
         const value = target[key];
         const valueSize = JSON.stringify({ [key]: value }).length - 2;
         const li = document.createElement("li");
-        li.classList.toggle("hover-info", targetIsObject);
+        li.classList.add("hover-info");
+        // li.classList.toggle("hover-info", targetIsObject);
+
         let nodeText = documentStats.perc(valueSize) + "% - " + key;
         li.dataset.path = JSON.stringify(path.concat([key]));
 

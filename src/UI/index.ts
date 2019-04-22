@@ -13,7 +13,7 @@ let documentStats = null;
 let originalObj = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-    elId("sub").click();
+    // elId("sub").click();
 });
 
 function handleFileSelect(evt: any) {

@@ -142,4 +142,23 @@ export class Stats {
         });
         return ks;
     }
+
+    distinctValue(key: string) {
+        const distinct = Object.keys(this.keyValue).filter((el) => {
+            return el.substr(0, key.length + 1) === key + "@";
+        });
+        distinct.sort((a, b) => {
+            if (this.keyValue[a] > this.keyValue[b]) return -1;
+            if (this.keyValue[a] < this.keyValue[b]) return 1;
+            return 0;
+        });
+        const ret = distinct.map((key) => {
+            return {
+                key,
+                count: this.keyValue[key],
+                size: this.keyValue[key] * key.length,
+            };
+        });
+        return ret;
+    }
 }
