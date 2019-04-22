@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Size Explorer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <style>
+        /*!
+         * "Fork me on GitHub" CSS ribbon v0.2.2 | MIT License
+         * https://github.com/simonwhitaker/github-fork-ribbon-css
+         */
+
+        .github-fork-ribbon {
+            width: 12.1em;
+            height: 12.1em;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            z-index: 9999;
+            pointer-events: none;
+            font-size: 13px;
+            text-decoration: none;
+            text-indent: -999999px;
+        }
+
+        .github-fork-ribbon.fixed {
+            position: fixed;
+        }
+
+        .github-fork-ribbon:hover, .github-fork-ribbon:active {
+            background-color: rgba(0, 0, 0, 0.0);
+        }
+
+        .github-fork-ribbon:before, .github-fork-ribbon:after {
+            /* The right and left classes determine the side we attach our banner to */
+            position: absolute;
+            display: block;
+            width: 15.38em;
+            height: 1.54em;
+
+            top: 3.23em;
+            right: -3.23em;
+
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .github-fork-ribbon:before {
+            content: "";
+
+            /* Add a bit of padding to give some substance outside the "stitching" */
+            padding: .38em 0;
+
+            /* Set the base colour */
+            background-color: #a00;
+
+            /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
+            background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
+            background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+
+            /* Add a drop shadow */
+            -webkit-box-shadow: 0 .15em .23em 0 rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 .15em .23em 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 .15em .23em 0 rgba(0, 0, 0, 0.5);
+
+            pointer-events: auto;
+        }
+
+        .github-fork-ribbon:after {
+            /* Set the text from the data-ribbon attribute */
+            content: attr(data-ribbon);
+
+            /* Set the text properties */
+            color: #fff;
+            font: 700 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.54em;
+            text-decoration: none;
+            text-shadow: 0 -.08em rgba(0, 0, 0, 0.5);
+            text-align: center;
+            text-indent: 0;
+
+            /* Set the layout properties */
+            padding: .15em 0;
+            margin: .15em 0;
+
+            /* Add "stitching" effect */
+            border-width: .08em 0;
+            border-style: dotted;
+            border-color: #fff;
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .github-fork-ribbon.left-top, .github-fork-ribbon.left-bottom {
+            right: auto;
+            left: 0;
+        }
+
+        .github-fork-ribbon.left-bottom, .github-fork-ribbon.right-bottom {
+            top: auto;
+            bottom: 0;
+        }
+
+        .github-fork-ribbon.left-top:before, .github-fork-ribbon.left-top:after, .github-fork-ribbon.left-bottom:before, .github-fork-ribbon.left-bottom:after {
+            right: auto;
+            left: -3.23em;
+        }
+
+        .github-fork-ribbon.left-bottom:before, .github-fork-ribbon.left-bottom:after, .github-fork-ribbon.right-bottom:before, .github-fork-ribbon.right-bottom:after {
+            top: auto;
+            bottom: 3.23em;
+        }
+
+        .github-fork-ribbon.left-top:before, .github-fork-ribbon.left-top:after, .github-fork-ribbon.right-bottom:before, .github-fork-ribbon.right-bottom:after {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body style="background-color: #123efa;">
+<a class="github-fork-ribbon right-top" href="https://github.com/simonwhitaker/github-fork-ribbon-css"
+   data-ribbon="Improve me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+<div class="flex-row" id="intro">
+    <div class="card" style=" position:absolute; left: 20%; top: 30%; width: 500px">
+        <div class="card-body">
+            <h5 class="card-title">JSON Size Explorer</h5>
+            <p>
+                This toll allow you to get some inside into the internal of your JSONs and help you find way to make them
+                smaller.
+            </p>
+            <br/>
+            <div style="display: flex;">
+                <div>
+                    <h6 class="card-subtitle mb-2 text-muted">File Import</h6>
+                    <div>
+                        <input type="file" id="file" style="width: 225px; position: relative; top: 20px;"/>
+                    </div>
+                </div>
+                <div style="padding-left: 30px; border-left: solid 1px black;">
+                    <h6 class="card-subtitle mb-2 text-muted">Paste</h6>
+                    <textarea id="area">
+
+{"variant": {"key": "default"}, "pending_requirement": null, "smb_info": {}, "user": {"last_name": null, "jurisdiction": "US", "tooltip_impressions": {}, "platforms": ["web", "mobile_web"], "has_password": true, "id": "5cae3c8361c2bf1367aacd2f", "first_name": null, "preferences": {"email_me": true}, "send_marketing_push_notifs": true, "is_smb_user": false, "push_enabled": false, "email": "hcom@hipmunk.com", "phone_number": null, "user_access_token": "1555810441.3.eJwzTU5MNU62MDYzTDZKSjM0NjNPTExOMUoDAFb8BxY.MjW51ZGRwuC3Ga9aeAnrIL1cawVHJ0dixta1IC264cS", "can_show_nps_survey_by_platform": {"web": false}, "user_set_home_airport": false, "agreed_tos_pp_version": "2018-05-22", "deal_alerts": {"4da330c02a0ceb6e950134f2": {"from_url": "San-Jose-CA", "from_name": "San Jose", "via_email": true, "via_push": true}}, "last_shared_email": "", "registered": true, "has_fb_linked": false, "confirmed": true, "creditcards": [], "can_show_nps_survey": false, "md5": "8d1dfffc4b92c618524217a25537df70", "home_airport": ["SJC"], "language": "en", "country": "US", "has_concur_linked": false, "in_mailing_list": true, "has_tripit_linked": false, "has_google_linked": false}, "needs_tos_pp": false, "refresh_id": "r5cbbc889ae6d986000a4f46b", "experiment_values": {"switch_hotwire_tier1_inline": "control", "right_column": "true", "hotel_nlp": "off", "switch_southwest_atl_inline": "off", "bundle_preload": "on", "show_o365": "control", "bb_landing_delay": "delay_1", "switch_southwest_phx_inline": "off", "react_dfp_ad": "on", "comp_site_landing_modal": "immediate", "new_book_page": "control", "switch_aa_beijing_inline": "control", "switch_eurowings_las_inline": "control", "hotel_name_ac": "true", "switch_compass_ustoca_inlin": "control", "switch_friendz_travel_inline": "control", "switch_hotwire_tier2_inline": "control", "test_hotel_filter_and_rating": "true", "free_cancellation": "control", "switch_opus_tier1_inline": "control", "hotel_right_rail_ad": "show", "show_time": "true", "switch_united_priority_inline": "control", "switch_intent_inline": "on", "switch_southwest_bos_inline": "control", "flight_to_hotel": "control", "52_weeks": "control", "switch_caesars-entertainment-planet-hollywood_inline": "control", "switch_southwest_mco_inline": "off", "flight_ontime_performance": "true", "switch_lufthansa_inline": "control", "southwest_position": "control", "use_adblock_masq": "on", "switch_qatar_tier2_inline": "control", "switch_aa_inline": "control", "switch_southwest_dca_inline": "off", "switch_southwest_dal_inline": "off", "switch_southwest_fare_sale_inline": "off", "optimized_flights": "on", "new_hotels_select": "test", "amenities_stress_test": "control", "hotel_upsell_modal": "control", "hotel_base_ecstasy": "control", "switch_southwest_stl_inline": "off", "im_homepage_checkbox": "im_standard", "retargeting": "control", "switch_aa_shanghai_inline": "control", "new_hotels_nlp": "control", "switch_southwest_san_inline": "off", "hotel_detail_direct": "control", "switch_travelopod-hawaii_us_ha_inline": "control", "hotel_result_layout": "v2", "inline_sort": "control", "chippy_webgl": "off", "nps_survey": "control", "switch_travelocity_dom_inline": "control", "switch_hawaiian_inline": "control", "flights_fare_alert_modal_lightbox": "control", "switch_travelopod-in_us_in_inline": "control", "switch_aa_hong_kong_inline": "control", "switch_qatar_tier4_inline": "control", "switch_aircanada_inline": "control", "switch_travelopod-eu_us_eu_inline": "control", "switch_aerlingus_inline": "control", "switch_flightguru_us_eu": "control", "switch_justfly_UStoUS_inline": "control", "switch_flightguru_eu_us": "control", "hotels_refresh_modal_delay": "480", "switch_flightguru_eu_us_inline": "control", "switch_southwest_bna_inline": "control", "trustyou_score_experiment": "ty_score", "concur": "v1", "switch_caesars-entertainment-paris_inline": "control", "im_js_lib": "control", "filter_hotel_on_price_sort": "control", "smarter_ads_hotel": "control", "switch_aa_auckland_inline": "control", "force_booking_page": "control", "account_capture_toaster": "control", "switch_orbitz_international_inline": "control", "hotel_upsell_button": "control", "switch_compass_flights_ustoas_inline": "control", "switch_southwest_cmh_inline": "control", "flights_decoupled_render": "control", "switch_emirates_inline": "control", "topline_compare_button": "on", "homepage_hero": "control", "hello_slack": "control", "switch_southwest_foundations_inline": "on", "switch_ compass_ustoca_inline": "control", "switch_united_bos_inline": "control", "hotel_rates_lightbox": "control", "show_hotel_video": "control", "uneasy": "test", "packages_flight_inline": "travelocity", "flights_refresh_modal": "control", "switch_southwest_ind_inline": "off", "switch_eurowings_mia_inline": "control", "switch_aa_2018_inline": "control", "switch_united_international_inline": "control", "switch_southwest_mfw_inline": "off", "switch_justfly_us_only_inline": "control", "switch_orbitz_domestic_inline": "control", "switch_caesars-entertainment-caesar-palace_inline": "control", "flight_conf_page": "control", "hotel_paid": "control", "flight_differentiation": "right_flight", "show_set_password_modal": "control", "switch_eurowings_nonUS_inline": "control", "switch_southwest_tpa_inline": "off", "switch_flightsbird_tier1_inline": "control", "switch_hipmunk_int_inline": "control", "webby_badge": "control", "new_tos_modal": "control", "post_book_flow": "control", "orbitz_inline": "control", "switch_aa_korea_inline": "control", "inline_intent_media": "control", "switch_flighthub_ca_inline": "control", "hotel_search_page": "control", "switch_flightsbird_us_mex_inline": "control", "hotels_refresh_modal": "control", "switch_southwest_aus_inline": "off", "flight_amenities": "control", "intent_media_frontpage_ui": "v1", "intent_media_flights_booking": "control", "switch_aa_tokyo_inline": "control", "cars_xsell": "v0", "intent_media_exit_unit": "control", "hotel_detail_pane": "test", "intent_media_hotel_in_flights_2": "control", "flight_segmentation": "v3", "switch_travelopod-carib_us_us_inline": "control", "render_sooner": "control", "frontpage_email_capture": "v1", "hotel_tab_larger_thumbnails": "control", "switch_cheapoair_inline": "control", "switch_compass_flights_ustoca_inline": "control", "switch_southwest_mke_inline": "off", "switch_eurowings_jfk_inline": "control", "switch_southwest_qsf_inline": "off", "nh_soft_done": "control", "switch_compass_ustosa_inline": "control", "hello_hipmunk": "control", "switch_compass_flights_astoca_inline": "control", "hotel": "2016_nlp_filter_view", "intent_media_num_prechecks": "control", "poi_distance": "show", "unnested_reducer": "on", "switch_united_sfo_inline": "control", "switch_southwest_hou_inline": "off", "switch_united_ord_inline": "control", "switch_justfly_UStoUS": "control", "switch_travelocity_int_inline": "control", "united_inline": "off", "flight_partners_modal_popup_size": "wide", "switch_united_den_inline": "control", "fetch_logging": "control", "hotel_2016_paid": "control", "switch_travelopod-ha_us_ha_inline\t": "on", "hotel_xsell_navigate": "new_tab", "map_pin_click": "null", "hotels_ftue_header": "control", "switch_compass_ustoca_inline": "control", "hotel_search_api_v4": "control", "switch_compass_astoca_inline": "control", "southwest_inline": "control", "cars_comp_ad": "im_standard", "smart_lock": "true", "switch_orbitz_tag1_inline": "control", "switch_eurowings_sea_inline": "control", "hotel_hide_blue_bar": "control", "compad_hotel_results_A": "im_standard", "ecstasy_alternative": "control", "switch_flightguru_us_eu_inline": "control", "switch_caesars-entertainment-linq_inline": "control", "react_flights": "on", "direct_to_detail_pane": "control", "display_header_form": "true", "april_fools": "control", "switch_qatar_tier1_inline": "control", "hotel_list_view_test": "control", "switch_eurowings_US_inline": "control", "im_flights": "control", "switch_priceline_inline": "control", "switch_aa_europe_inline": "control", "switch_southwest_qla_inline": "off", "single_boh": "min", "switch_united_pdx_inline": "control", "ad_experiment": "test", "switch_hipmunk_dom_inline": "control", "routehappy_dfp": "show", "switch_flight_guru_eu_us": "control", "suppress_location_tab": "control", "agony_sort": "test", "hotel_slide_amenities_display": "V1", "arranger_menu": "control", "switch_tripomate_us_inline": "control", "switch_southwest_mci_inline": "off", "modify_header_links": "enable", "log_hotel_search_details": "control", "switch_eurowings_rsw_inline": "control", "switch_qatar_tier3_inline": "control", "switch_virgin_inline": "control", "hotel_modal_book_on_label": "control", "switch_united_domestic_inline": "control", "switch_southwest_mdw_inline": "off", "hotel_dropdown": "control", "flight_filters_react": "new_layout", "switch_southwest_smf_inline": "off", "hotel_surface_free_cancellation": "show", "switch_southwest_den_inline": "off", "switch_travelopod-mx_us_mx_inline": "control", "flights_timeslider_update": "control", "switch_aa_sydney_inline": "control", "new_hipfares": "control", "olark_placement": "control", "switch_travelopod-mx_us_mx_inline\t": "control", "switch_opus_useu_inline": "control", "switch_flightschannel_inline": "control", "intent_media_topline_ui": "control", "switch_southwest_bwi_inline": "off", "switch_flightsbird_us_carib_inline": "control", "switch_tripomate_ca_inline": "control", "show_onboarding": "control", "switch_wow_inline": "control", "hotel_landing_modal": "control"}, "visit_info": {"first_query": "", "utm_group": "none", "first_recapture_type": "none", "first_utm_campaign": "none", "utm_content": "none", "first_t2": [], "first_utm_keyword": "none", "query": "", "google_keywords": "none", "first_utm_content": "none", "utm_campaign": "none", "utm_keyword": "none", "user_id": "5cae3c8361c2bf1367aacd2f", "first_is_registered": false, "recapture_type": "none", "is_registered": true, "recapture_page": "none", "first_paid_user": false, "first_utm_group": "none", "first_google_keywords": "none", "first_fragment": "reset", "first_visit_id": "5cae3e95a553234bd89c0778", "fragment": "", "first_utm_source": "none", "first_recapture_page": "none", "utm_source": "none", "first_referer_domain": "none", "referer": "https://www.hipmunk.com/", "path": "/", "recapture": "none", "visit_id": "5cbbc885ae6d9854a97bafd1", "utm_medium": "none", "first_path": "/", "t2": [], "first_utm_medium": "none", "first_referer": "https://www.hipmunk.com/", "paid_user": false, "referer_domain": "none", "first_recapture": "none"}, "default_trip_id": "5cae3c83a553234bd89c01ad", "im_ad_display": {"flight_instant_overlay": false, "hotel_instant_overlay": false, "hotel_top_card": false, "hotel_back_unit": false, "flight_top_card": false, "hotel_exit_unit": false, "flight_exit_unit": false, "flight_back_unit": false, "flight_delayed_overlay": false, "hotel_delayed_overlay": false}, "logged_in": true}
+
+
+                    </textarea><br/>
+                    <button id="sub" class="btn btn-info btn-sm">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div id="result-explorer" class="flex-row" hidden></div>
+    <div id="result-summary" class="flex-row" hidden>
+        <br/>
+        <div class="input-group mb-3">
+            <input type="number" class="form-control col-sm-1" id="nbItems" value="5"/>
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">items to show</span>
+            </div>
+        </div>
+        <div>
+            <div id="general"></div>
+        </div>
+        <div>
+            <h2>Keys</h2>
+            <div>
+                <ul id="keyStats"></ul>
+            </div>
+            <h3>Most Frequently used keys</h3>
+            <div class="alert alert-secondary" role="alert">
+                List all the keys found in the JSON and order them by how many times they were found.
+            </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>Key Name</th>
+                    <th>Count</th>
+                    <th>Total Size</th>
+                    <th>%</th>
+                </tr>
+                </thead>
+                <tbody id="freqKeys"></tbody>
+            </table>
+            <h3>Heaviest keys</h3>
+            <div class="alert alert-secondary" role="alert">
+                List all the keys found in the JSON and order them by how many characters are needed to store them.
+            </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>Key Name</th>
+                    <th>Count</th>
+                    <th>Total Size</th>
+                    <th>%</th>
+                </tr>
+                </thead>
+                <tbody id="heavyKeys"></tbody>
+            </table>
+        </div>
+        <hr/>
+        <div>
+            <h2>Values</h2>
+            <div id="valueStats"></div>
+            <h3>Most Frequent Values</h3>
+            <div class="alert alert-secondary" role="alert">
+                List all the values found in the JSON and order them by how many we saw them.
+            </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>Value</th>
+                    <th>Count</th>
+                    <th>Total Size</th>
+                    <th>%</th>
+                </tr>
+                </thead>
+                <tbody id="freqValue"></tbody>
+            </table>
+            <h3>Heaviest Values</h3>
+            <div class="alert alert-secondary" role="alert">
+                List all the values found in the JSON and order them by how many characters are needed to store them.
+            </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>Value</th>
+                    <th>Count</th>
+                    <th>Total Size</th>
+                    <th>%</th>
+                </tr>
+                </thead>
+                <tbody id="heavyValue"></tbody>
+            </table>
+        </div>
+        <hr/>
+        <div>
+            <h2>Duplicates Key/Values</h2>
+            <h3>Most Frequent Duplicates</h3>
+            <div class="alert alert-secondary" role="alert">
+                List all the tuples Key/Value found in the JSON and order them by how often we saw them.
+            </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>Key @#@ Value</th>
+                    <th>Count</th>
+                    <th>Total Size</th>
+                    <th>%</th>
+                </tr>
+                </thead>
+                <tbody id="dupFreq"></tbody>
+            </table>
+            <h3>Heaviest Duplicates</h3>
+            <div class="alert alert-secondary" role="alert">
+                List all the tuples Key/Value ordered by how many characters are used to store them.
+            </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>Key @#@ Value</th>
+                    <th>Count</th>
+                    <th>Total Size</th>
+                    <th>%</th>
+                </tr>
+                </thead>
+                <tbody id="heavyDup"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
