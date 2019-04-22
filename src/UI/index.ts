@@ -5,16 +5,16 @@
 
 import { elId } from "./DomUtils";
 import { drawExplorer } from "./drawExplorer";
-import { drawSummary } from "./drawSummary";
+// import { drawSummary } from "./drawSummary";
 import JSONSizeExplorer from "../JsonSizeExplorer/main";
 
 let NB_ITEMS = 5;
 let documentStats = null;
 let originalObj = null;
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     elId("sub").click();
-// });
+document.addEventListener("DOMContentLoaded", () => {
+    elId("sub").click();
+});
 
 function handleFileSelect(evt: any) {
     // Can not find the correct event type.
@@ -65,6 +65,6 @@ function processRaw(raw: string) {
     originalObj = JSON.parse(raw);
     document.body.style.backgroundColor = "";
 
-    drawSummary(documentStats);
+    // drawSummary(documentStats);
     drawExplorer(originalObj, documentStats);
 }
