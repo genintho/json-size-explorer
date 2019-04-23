@@ -14,7 +14,7 @@ export function ResultsRoot(props: iProps) {
     return (
         <div className="flex-row">
             <ResultSummary jsonStats={props.jsonStats} />
-            <ResultTableCount />
+            <ResultTableCount jsonStats={props.jsonStats} />
             <Explorer />
         </div>
     );

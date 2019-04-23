@@ -10,6 +10,7 @@ export function ResultSummary(props: iProps) {
     const stats = props.jsonStats;
     return (
         <div className="flex-row">
+          <h1>Summary</h1>
             <ul>
                 <li>Total document size: {thousands(stats.totalLength)}</li>
                 <li>Number of keys: {thousands(stats.nbOfKey())}</li>
