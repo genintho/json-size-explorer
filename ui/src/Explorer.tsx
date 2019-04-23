@@ -19,10 +19,7 @@ export class Explorer extends React.Component<iProps, iState> {
         return (
             <div className="flex-row">
                 <h2>Json Explorer</h2>
-                <List
-                    obj={this.props.jsonObj}
-                    stats={this.props.jsonStats}
-                />
+                <List obj={this.props.jsonObj} stats={this.props.jsonStats} />
             </div>
         );
     }
@@ -59,31 +56,35 @@ interface iListItemProps {
     value: any;
     stats: Stats;
 }
+
 interface iListItemState {
-  open: boolean;
+    open: boolean;
 }
+
 class ListItem extends React.Component<iListItemProps, iListItemState> {
-  constructor(props: iListItemProps) {
-    super(props);
-    this.state= {
-      open: false
-    };
-    this.onClick = this.onClick.bind(this);
-  }
-  onClick() {
-    this.setState({open: !this.state.open});
-  }
+    constructor(props: iListItemProps) {
+        super(props);
+        this.state = {
+            open: false,
+        };
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick() {
+        this.setState({ open: !this.state.open });
+    }
+
     render() {
-        const {value, stats } = this.props;
+        const { value, stats } = this.props;
         const key = this.props.name; // Key could not be used as it conflict with the JSX "key" attribute
         const valueSize = JSON.stringify({ [key]: value }).length - 2;
         const canOpen = _.isPlainObject(value);
         return (
             <li>
-              <span onClick={canOpen ? this.onClick : _.noop}>
-                {stats.perc(valueSize)}% {key} <Value value={value} />
-              </span>
-              {this.state.open && <List obj={value} stats={stats} />}
+                <span onClick={canOpen ? this.onClick : _.noop}>
+                    {stats.perc(valueSize)}% {key} <Value value={value} />
+                </span>
+                {this.state.open && <List obj={value} stats={stats} />}
             </li>
         );
     }
@@ -94,20 +95,26 @@ function Value(props: { value: any }) {
     if (_.isNull(value)) {
         return <>null</>;
     }
-  if (_.isNumber(value)) {
-    return <>{value}</>;
-  }
-  if (_.isString(value)) {
-    return <>"{limitLen(value)}"</>;
-  }
-  if (_.isArray(value)) {
-    return <>[{value.length}]</>;
-  }
-  if (_.isPlainObject(value)) {
-    return <>{'{'}{_.size(value)}{'}'}</>;
-  }
-  if (_.isBoolean(value)) {
-    return <>{String(value)}</>;
-  }
-    return (<>###</>);
+    if (_.isNumber(value)) {
+        return <>{value}</>;
+    }
+    if (_.isString(value)) {
+        return <>"{limitLen(value)}"</>;
+    }
+    if (_.isArray(value)) {
+        return <>[{value.length}]</>;
+    }
+    if (_.isPlainObject(value)) {
+        return (
+            <>
+                {"{"}
+                {_.size(value)}
+                {"}"}
+            </>
+        );
+    }
+    if (_.isBoolean(value)) {
+        return <>{String(value)}</>;
+    }
+    return <>###</>;
 }
