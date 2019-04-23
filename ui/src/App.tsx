@@ -16,12 +16,13 @@ interface iState {
 export class App extends React.Component<iProps, iState> {
     constructor(propS: iProps) {
         super(propS);
-        const testObj = JSON.stringify({ a: 5, b: 56 });
-
+        // const testObj = JSON.stringify({ a: 5, b: 56 });
+        const testObj = "";
+        const stat = testObj.length ? JSONSizeExplorer(testObj) : new Stats(0);
         this.state = {
             rawJsonString: testObj,
             jsonObj: {},
-            jsonStats: JSONSizeExplorer(testObj),
+            jsonStats: stat,
         };
     }
 
