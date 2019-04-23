@@ -20,7 +20,6 @@ export class Explorer extends React.Component<iProps, iState> {
             <div className="flex-row">
                 <h2>Json Explorer</h2>
                 <List
-                    path={[]}
                     obj={this.props.jsonObj}
                     stats={this.props.jsonStats}
                 />
@@ -32,7 +31,6 @@ export class Explorer extends React.Component<iProps, iState> {
 interface iListProps {
     obj: IterableObject;
     stats: Stats;
-    path: string[];
 }
 
 class List extends React.Component<iListProps> {
@@ -42,11 +40,9 @@ class List extends React.Component<iListProps> {
         return (
             <ul>
                 {keys.map((key) => {
-                    const elemPath = this.props.path.concat([key]);
                     return (
                         <ListItem
-                            key={JSON.stringify(elemPath)}
-                            path={elemPath}
+                            key={_.uniqueId(key)}
                             name={key}
                             value={this.props.obj[key]}
                             stats={this.props.stats}
@@ -62,16 +58,32 @@ interface iListItemProps {
     name: any;
     value: any;
     stats: Stats;
-    path: string[];
 }
-
-class ListItem extends React.Component<iListItemProps> {
+interface iListItemState {
+  open: boolean;
+}
+class ListItem extends React.Component<iListItemProps, iListItemState> {
+  constructor(props: iListItemProps) {
+    super(props);
+    this.state= {
+      open: false
+    };
+    this.onClick = this.onClick.bind(this);
+  }
+  onClick() {
+    this.setState({open: !this.state.open});
+  }
     render() {
-        const { name, value, stats, path } = this.props;
-        const valueSize = JSON.stringify({ [name]: value }).length - 2;
+        const {value, stats } = this.props;
+        const key = this.props.name; // Key could not be used as it conflict with the JSX "key" attribute
+        const valueSize = JSON.stringify({ [key]: value }).length - 2;
+        const canOpen = _.isPlainObject(value);
         return (
             <li>
-                {stats.perc(valueSize)}% {name} <Value value={value} />
+              <span onClick={canOpen ? this.onClick : _.noop}>
+                {stats.perc(valueSize)}% {key} <Value value={value} />
+              </span>
+              {this.state.open && <List obj={value} stats={stats} />}
             </li>
         );
     }
@@ -80,7 +92,7 @@ class ListItem extends React.Component<iListItemProps> {
 function Value(props: { value: any }) {
     const value = props.value;
     if (_.isNull(value)) {
-        return <>"null"</>;
+        return <>null</>;
     }
   if (_.isNumber(value)) {
     return <>{value}</>;
@@ -93,6 +105,9 @@ function Value(props: { value: any }) {
   }
   if (_.isPlainObject(value)) {
     return <>{'{'}{_.size(value)}{'}'}</>;
+  }
+  if (_.isBoolean(value)) {
+    return <>{String(value)}</>;
   }
     return (<>###</>);
 }
