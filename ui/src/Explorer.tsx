@@ -5,6 +5,7 @@ import { limitLen } from "./DomUtils";
 import { HoverStats } from "./HoverStats";
 
 type tToggleCollapsedKey = (path: string[]) => void;
+type tHoverOn = (key: string) => void;
 
 interface iProps {
     jsonObj: IterableObject;
@@ -28,6 +29,11 @@ export class Explorer extends React.Component<iProps, iState> {
             expendedKeys: {},
         };
         this.toggleCollapsedKey = this.toggleCollapsedKey.bind(this);
+        this.hoverOn = this.hoverOn.bind(this);
+    }
+
+    hoverOn(keyName: string) {
+        this.setState({ hoverObjKey: keyName });
     }
 
     toggleCollapsedKey(path: string[]) {
@@ -49,7 +55,7 @@ export class Explorer extends React.Component<iProps, iState> {
                         display: "grid",
                         gridTemplateColumns: "1fr 1fr",
                         gridTemplateRows: "1fr",
-                      textAlign:"left"
+                        textAlign: "left",
                     }}
                 >
                     <div style={{ height: "1000px", overflow: "auto" }}>
@@ -57,8 +63,9 @@ export class Explorer extends React.Component<iProps, iState> {
                             obj={this.props.jsonObj}
                             stats={this.props.jsonStats}
                             path={[]}
-                            toggleCollapsedKey={this.toggleCollapsedKey}
                             expendedKeys={this.state.expendedKeys}
+                            toggleCollapsedKey={this.toggleCollapsedKey}
+                            hoverOn={this.hoverOn}
                         />
                     </div>
                     <div>
@@ -66,7 +73,7 @@ export class Explorer extends React.Component<iProps, iState> {
                             <HoverStats
                                 jsonObj={this.props.jsonObj}
                                 jsonStats={this.props.jsonStats}
-                                objKey={"ha"}
+                                objKey={this.state.hoverObjKey}
                             />
                         )}
                     </div>
@@ -82,6 +89,7 @@ interface iListProps {
     toggleCollapsedKey: tToggleCollapsedKey;
     path: string[];
     expendedKeys: IterableObject;
+    hoverOn: tHoverOn;
 }
 
 class List extends React.Component<iListProps> {
@@ -89,7 +97,7 @@ class List extends React.Component<iListProps> {
         const keys = Object.keys(this.props.obj);
         keys.sort();
         return (
-            <ul style={{marginLeft:"15px", paddingLeft:"0px"}}>
+            <ul style={{ marginLeft: "15px", paddingLeft: "0px" }}>
                 {keys.map((key) => {
                     const pathValue = _.get(
                         this.props.expendedKeys,
@@ -104,6 +112,7 @@ class List extends React.Component<iListProps> {
                             stats={this.props.stats}
                             toggleCollapsedKey={this.props.toggleCollapsedKey}
                             isOpen={pathValue !== false}
+                            hoverOn={this.props.hoverOn}
                             expendedKeys={pathValue !== false ? pathValue : {}}
                         />
                     );
@@ -120,6 +129,7 @@ interface iListItemProps {
     path: string[];
     expendedKeys: any;
     isOpen: boolean;
+    hoverOn: tHoverOn;
 }
 
 interface iListItemState {
@@ -130,8 +140,15 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
     constructor(props: iListItemProps) {
         super(props);
         this.onClick = this.onClick.bind(this);
+        this.onHoverIn = this.onHoverIn.bind(this);
+        this.onHoverOut = this.onHoverOut.bind(this);
     }
-
+    onHoverIn() {
+        this.props.hoverOn(this.props.path[this.props.path.length - 1]);
+    }
+    onHoverOut() {
+        this.props.hoverOn("");
+    }
     onClick() {
         this.props.toggleCollapsedKey(this.props.path);
     }
@@ -144,7 +161,14 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
         const sizePercentage = stats.perc(valueSize);
         return (
             <li>
-                <span onClick={canOpen ? this.onClick : _.noop} style={{color: heatMapColorforValue(sizePercentage/100)}}>
+                <span
+                    onClick={canOpen ? this.onClick : _.noop}
+                    style={{
+                        color: heatMapColorforValue(sizePercentage / 100),
+                    }}
+                    onMouseEnter={this.onHoverIn}
+                    onMouseLeave={this.onHoverOut}
+                >
                     {sizePercentage}% {objKey} <Value value={value} />
                 </span>
                 {this.props.isOpen && (
@@ -154,6 +178,7 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
                         path={this.props.path}
                         toggleCollapsedKey={this.props.toggleCollapsedKey}
                         expendedKeys={this.props.expendedKeys}
+                        hoverOn={this.props.hoverOn}
                     />
                 )}
             </li>
@@ -161,9 +186,9 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
     }
 }
 
-function heatMapColorforValue(value: number){
-  var h = (1.0 - value) * 240
-  return "hsl(" + h + ", 100%, 50%)";
+function heatMapColorforValue(value: number) {
+    var h = (1.0 - value) * 240;
+    return "hsl(" + h + ", 100%, 50%)";
 }
 
 function Value(props: { value: any }) {
