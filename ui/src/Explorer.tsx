@@ -2,31 +2,75 @@ import * as _ from "lodash";
 import React from "react";
 import { Stats } from "./JsonSizeExplorer/stats";
 import { limitLen } from "./DomUtils";
+import { HoverStats } from "./HoverStats";
+
+type tToggleCollapsedKey = (path: string[]) => void;
 
 interface iProps {
     jsonObj: IterableObject;
     jsonStats: Stats;
 }
 
-interface iState {}
+interface iState {
+    hoverObjKey: string;
+    expendedKeys: IterableObject;
+}
 
 interface IterableObject {
     [s: string]: number | string | boolean | IterableObject;
 }
 
 export class Explorer extends React.Component<iProps, iState> {
+    constructor(props: iProps) {
+        super(props);
+        this.state = {
+            hoverObjKey: "",
+            expendedKeys: {},
+        };
+        this.toggleCollapsedKey = this.toggleCollapsedKey.bind(this);
+    }
+
+    toggleCollapsedKey(path: string[]) {
+        const copyExpendedKeys = _.clone(this.state.expendedKeys);
+        if (_.has(copyExpendedKeys, path)) {
+            _.unset(copyExpendedKeys, path);
+        } else {
+            _.set(copyExpendedKeys, path, true);
+        }
+
+        this.setState({ expendedKeys: copyExpendedKeys });
+    }
     render() {
         return (
             <div className="flex-row">
                 <h2>Json Explorer</h2>
-              <div style={{display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gridTemplateRows: "1fr"}}>
-                <div style={{height:"1000px", overflow:"auto"}}>
-                <List obj={this.props.jsonObj} stats={this.props.jsonStats} />
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gridTemplateRows: "1fr",
+                      textAlign:"left"
+                    }}
+                >
+                    <div style={{ height: "1000px", overflow: "auto" }}>
+                        <List
+                            obj={this.props.jsonObj}
+                            stats={this.props.jsonStats}
+                            path={[]}
+                            toggleCollapsedKey={this.toggleCollapsedKey}
+                            expendedKeys={this.state.expendedKeys}
+                        />
+                    </div>
+                    <div>
+                        {this.state.hoverObjKey.length > 0 && (
+                            <HoverStats
+                                jsonObj={this.props.jsonObj}
+                                jsonStats={this.props.jsonStats}
+                                objKey={"ha"}
+                            />
+                        )}
+                    </div>
                 </div>
-                <div> Stats</div>
-              </div>
             </div>
         );
     }
@@ -35,6 +79,9 @@ export class Explorer extends React.Component<iProps, iState> {
 interface iListProps {
     obj: IterableObject;
     stats: Stats;
+    toggleCollapsedKey: tToggleCollapsedKey;
+    path: string[];
+    expendedKeys: IterableObject;
 }
 
 class List extends React.Component<iListProps> {
@@ -44,12 +91,20 @@ class List extends React.Component<iListProps> {
         return (
             <ul>
                 {keys.map((key) => {
+                    const pathValue = _.get(
+                        this.props.expendedKeys,
+                        key,
+                        false
+                    );
                     return (
                         <ListItem
                             key={_.uniqueId(key)}
-                            name={key}
+                            path={this.props.path.concat([key])}
                             value={this.props.obj[key]}
                             stats={this.props.stats}
+                            toggleCollapsedKey={this.props.toggleCollapsedKey}
+                            isOpen={pathValue !== false}
+                            expendedKeys={pathValue !== false ? pathValue : {}}
                         />
                     );
                 })}
@@ -59,9 +114,12 @@ class List extends React.Component<iListProps> {
 }
 
 interface iListItemProps {
-    name: any;
     value: any;
     stats: Stats;
+    toggleCollapsedKey: tToggleCollapsedKey;
+    path: string[];
+    expendedKeys: any;
+    isOpen: boolean;
 }
 
 interface iListItemState {
@@ -71,30 +129,41 @@ interface iListItemState {
 class ListItem extends React.Component<iListItemProps, iListItemState> {
     constructor(props: iListItemProps) {
         super(props);
-        this.state = {
-            open: false,
-        };
         this.onClick = this.onClick.bind(this);
     }
 
     onClick() {
-        this.setState({ open: !this.state.open });
+        this.props.toggleCollapsedKey(this.props.path);
     }
 
     render() {
+        const objKey = this.props.path[this.props.path.length - 1];
         const { value, stats } = this.props;
-        const key = this.props.name; // Key could not be used as it conflict with the JSX "key" attribute
-        const valueSize = JSON.stringify({ [key]: value }).length - 2;
+        const valueSize = JSON.stringify({ [objKey]: value }).length - 2;
         const canOpen = _.isPlainObject(value);
+        const sizePercentage = stats.perc(valueSize);
         return (
             <li>
-                <span onClick={canOpen ? this.onClick : _.noop}>
-                    {stats.perc(valueSize)}% {key} <Value value={value} />
+                <span onClick={canOpen ? this.onClick : _.noop} style={{color: heatMapColorforValue(sizePercentage/100)}}>
+                    {sizePercentage}% {objKey} <Value value={value} />
                 </span>
-                {this.state.open && <List obj={value} stats={stats} />}
+                {this.props.isOpen && (
+                    <List
+                        obj={value}
+                        stats={stats}
+                        path={this.props.path}
+                        toggleCollapsedKey={this.props.toggleCollapsedKey}
+                        expendedKeys={this.props.expendedKeys}
+                    />
+                )}
             </li>
         );
     }
+}
+
+function heatMapColorforValue(value: number){
+  var h = (1.0 - value) * 240
+  return "hsl(" + h + ", 100%, 50%)";
 }
 
 function Value(props: { value: any }) {
