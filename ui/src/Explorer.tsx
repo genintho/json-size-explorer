@@ -89,7 +89,7 @@ class List extends React.Component<iListProps> {
         const keys = Object.keys(this.props.obj);
         keys.sort();
         return (
-            <ul>
+            <ul style={{marginLeft:"15px", paddingLeft:"0px"}}>
                 {keys.map((key) => {
                     const pathValue = _.get(
                         this.props.expendedKeys,
