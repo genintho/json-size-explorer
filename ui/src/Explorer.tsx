@@ -19,7 +19,14 @@ export class Explorer extends React.Component<iProps, iState> {
         return (
             <div className="flex-row">
                 <h2>Json Explorer</h2>
+              <div style={{display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gridTemplateRows: "1fr"}}>
+                <div style={{height:"1000px", overflow:"auto"}}>
                 <List obj={this.props.jsonObj} stats={this.props.jsonStats} />
+                </div>
+                <div> Stats</div>
+              </div>
             </div>
         );
     }
