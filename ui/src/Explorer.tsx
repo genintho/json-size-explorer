@@ -88,7 +88,8 @@ interface iListProps {
 
 class List extends React.Component<iListProps> {
     render() {
-        const keys = Object.keys(this.props.obj);
+        const { obj } = this.props;
+        const keys = Object.keys(obj);
         keys.sort();
         return (
             <ul className={style.list}>
@@ -102,7 +103,8 @@ class List extends React.Component<iListProps> {
                         <ListItem
                             key={_.uniqueId(key)}
                             path={this.props.path.concat([key])}
-                            value={this.props.obj[key]}
+                            valueFromArray={_.isArray(obj)}
+                            value={obj[key]}
                             stats={this.props.stats}
                             toggleCollapsedKey={this.props.toggleCollapsedKey}
                             isOpen={pathValue !== false}
@@ -117,13 +119,14 @@ class List extends React.Component<iListProps> {
 }
 
 interface iListItemProps {
-    value: any;
-    stats: Stats;
-    toggleCollapsedKey: tToggleCollapsedKey;
-    path: string[];
-    expendedKeys: any;
-    isOpen: boolean;
-    hoverOn: tHoverOn;
+    readonly value: any;
+    readonly valueFromArray: boolean;
+    readonly stats: Stats;
+    readonly toggleCollapsedKey: tToggleCollapsedKey;
+    readonly path: string[];
+    readonly expendedKeys: any;
+    readonly isOpen: boolean;
+    readonly hoverOn: tHoverOn;
 }
 
 interface iListItemState {
@@ -151,8 +154,11 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
         const objKey = this.props.path[this.props.path.length - 1];
         const { value, stats } = this.props;
         const valueSize = JSON.stringify({ [objKey]: value }).length - 2;
-        const canOpen = _.isPlainObject(value);
+        const canOpen = _.isPlainObject(value) || _.isArray(value);
         const sizePercentage = stats.perc(valueSize);
+        const keyLabel = this.props.valueFromArray
+            ? "Array Key " + objKey
+            : objKey;
         return (
             <li className={style.item}>
                 <span
@@ -163,7 +169,7 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
                     onMouseEnter={this.onHoverIn}
                     onMouseLeave={this.onHoverOut}
                 >
-                    {sizePercentage}% {objKey} <Value value={value} />
+                    {sizePercentage}% {keyLabel} <Value value={value} />
                 </span>
                 {this.props.isOpen && (
                     <List
