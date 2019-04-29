@@ -154,7 +154,7 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
         const canOpen = _.isPlainObject(value);
         const sizePercentage = stats.perc(valueSize);
         return (
-            <li>
+            <li className={style.item}>
                 <span
                     onClick={canOpen ? this.onClick : _.noop}
                     style={{
@@ -188,28 +188,35 @@ function heatMapColorforValue(value: number) {
 function Value(props: { value: any }) {
     const value = props.value;
     if (_.isNull(value)) {
-        return <>null</>;
-    }
-    if (_.isNumber(value)) {
-        return <>{value}</>;
-    }
-    if (_.isString(value)) {
-        return <>"{limitLen(value, 25)}"</>;
-    }
-    if (_.isArray(value)) {
-        return <>[{value.length}]</>;
-    }
-    if (_.isPlainObject(value)) {
+        return <span className={style.null + " " + style.value}>null</span>;
+    } else if (_.isNumber(value)) {
+        return <span className={style.num + " " + style.value}>{value}</span>;
+    } else if (_.isString(value)) {
         return (
-            <>
+            <span className={style.str + " " + style.value}>
+                "{limitLen(value, 25)}"
+            </span>
+        );
+    } else if (_.isArray(value)) {
+        return (
+            <span className={style.arr + " " + style.value}>
+                [{value.length}]
+            </span>
+        );
+    } else if (_.isPlainObject(value)) {
+        return (
+            <span className={style.obj + " " + style.value}>
                 {"{"}
                 {_.size(value)}
                 {"}"}
-            </>
+            </span>
         );
-    }
-    if (_.isBoolean(value)) {
-        return <>{String(value)}</>;
+    } else if (_.isBoolean(value)) {
+        return (
+            <span className={style.bool + " " + style.value}>
+                {String(value)}
+            </span>
+        );
     }
     return <>###</>;
 }

@@ -15,3 +15,42 @@
     margin-left: 15px;
     padding-left: 0px;
 }
+
+.item {
+
+}
+
+.item:hover {
+    /*background-color: green;*/
+}
+
+/* ------------------------------------------------ */
+.value {
+    color: black;
+}
+
+
+.value.arr {
+    color: black;
+}
+
+.value.bool {
+    font-style: italic;
+    font-variant-caps: small-caps;
+}
+
+.value.null {
+    font-style: italic;
+}
+
+.value.num {
+}
+
+.value.obj {
+    color: black;
+}
+
+.value.str {
+    font-style: italic;
+}
+/* ------------------------------------------------ */
