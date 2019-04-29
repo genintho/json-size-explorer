@@ -200,7 +200,7 @@ function Value(props: { value: any }) {
         return <>{value}</>;
     }
     if (_.isString(value)) {
-        return <>"{limitLen(value)}"</>;
+        return <>"{limitLen(value, 25)}"</>;
     }
     if (_.isArray(value)) {
         return <>[{value.length}]</>;

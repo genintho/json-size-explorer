@@ -2,6 +2,8 @@ export interface Indexable {
     [key: string]: any;
 }
 
+const TOKEN = "@#@";
+
 export class Stats {
     public readonly totalLength: number;
     public readonly keyValue: Indexable;
@@ -22,7 +24,7 @@ export class Stats {
         this.keys[key] = this.keys[key] + 1;
 
         const jsonValue = JSON.stringify(value);
-        const kv = key + "@#@" + jsonValue;
+        const kv = key + TOKEN + jsonValue;
         if (!this.keyValue[kv]) {
             this.keyValue[kv] = 0;
         }
@@ -145,20 +147,19 @@ export class Stats {
 
     distinctValue(key: string) {
         const distinct = Object.keys(this.keyValue).filter((el) => {
-            return el.substr(0, key.length + 1) === key + "@";
+            return el.substr(0, key.length + TOKEN.length) === key + TOKEN;
         });
         distinct.sort((a, b) => {
             if (this.keyValue[a] > this.keyValue[b]) return -1;
             if (this.keyValue[a] < this.keyValue[b]) return 1;
             return 0;
         });
-        const ret = distinct.map((key) => {
+        return distinct.map((keyValue) => {
             return {
-                key,
-                count: this.keyValue[key],
-                size: this.keyValue[key] * key.length,
+                key: keyValue,
+                count: this.keyValue[keyValue],
+                size: this.keyValue[keyValue] * keyValue.length,
             };
         });
-        return ret;
     }
 }
