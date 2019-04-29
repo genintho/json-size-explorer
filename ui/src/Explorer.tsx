@@ -3,6 +3,7 @@ import React from "react";
 import { Stats } from "./JsonSizeExplorer/stats";
 import { limitLen } from "./DomUtils";
 import { HoverStats } from "./HoverStats";
+import style from "./Explorer.module.css";
 
 type tToggleCollapsedKey = (path: string[]) => void;
 type tHoverOn = (key: string) => void;
@@ -50,15 +51,8 @@ export class Explorer extends React.Component<iProps, iState> {
         return (
             <div className="flex-row">
                 <h2>Json Explorer</h2>
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gridTemplateRows: "1fr",
-                        textAlign: "left",
-                    }}
-                >
-                    <div style={{ height: "1000px", overflow: "auto" }}>
+                <div className={style.globalContainer}>
+                    <div className={style.listContainer}>
                         <List
                             obj={this.props.jsonObj}
                             stats={this.props.jsonStats}
@@ -97,7 +91,7 @@ class List extends React.Component<iListProps> {
         const keys = Object.keys(this.props.obj);
         keys.sort();
         return (
-            <ul style={{ marginLeft: "15px", paddingLeft: "0px" }}>
+            <ul className={style.list}>
                 {keys.map((key) => {
                     const pathValue = _.get(
                         this.props.expendedKeys,

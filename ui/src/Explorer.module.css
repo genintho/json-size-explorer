@@ -1,0 +1,17 @@
+.globalContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    text-align: left;
+}
+
+.listContainer {
+    height: 1000px;
+    overflow: auto;
+    padding-left: 10px;
+}
+
+.list {
+    margin-left: 15px;
+    padding-left: 0px;
+}

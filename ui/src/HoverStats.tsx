@@ -31,7 +31,8 @@ export class HoverStats extends React.Component<iProps> {
                     </li>
                     <li>
                         The total size of all the keys and values{" "}
-                        {thousands(valueSize)} ({jsonStats.perc(valueSize)})
+                        {thousands(valueSize)} ({jsonStats.perc(valueSize)}
+                        %)
                     </li>
                     <li>
                         Key has {distinctValues.length} distinct values
