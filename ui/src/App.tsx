@@ -16,7 +16,7 @@ interface iState {
 export class App extends React.Component<iProps, iState> {
     constructor(propS: iProps) {
         super(propS);
-        const testObj = {};
+        // const testObj = {};
         const testRawStr = "";
         // const testRawStr = JSON.stringify(testObj);
         const stat = testRawStr.length

@@ -138,13 +138,9 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
         super(props);
         this.onClick = this.onClick.bind(this);
         this.onHoverIn = this.onHoverIn.bind(this);
-        this.onHoverOut = this.onHoverOut.bind(this);
     }
     onHoverIn() {
         this.props.hoverOn(this.props.path[this.props.path.length - 1]);
-    }
-    onHoverOut() {
-        this.props.hoverOn("");
     }
     onClick() {
         this.props.toggleCollapsedKey(this.props.path);
@@ -167,7 +163,6 @@ class ListItem extends React.Component<iListItemProps, iListItemState> {
                         color: heatMapColorforValue(sizePercentage / 100),
                     }}
                     onMouseEnter={this.onHoverIn}
-                    onMouseLeave={this.onHoverOut}
                 >
                     {sizePercentage}% {keyLabel} <Value value={value} />
                 </span>
