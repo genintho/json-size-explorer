@@ -5,7 +5,7 @@
     "ui:start": "react-scripts start",
     "ui:build": "react-scripts build",
     "build": "rollup -c",
-    "predeploy": "npm run build",
+    "predeploy": "npm run ui:build",
     "deploy": "gh-pages -b master -d ui:build",
     "test": "node node_modules/.bin/jest",
     "test:watch": "node node_modules/.bin/jest --watch",
