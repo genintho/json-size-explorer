@@ -1,0 +1,356 @@
+{
+  "currency": {
+    "symbol": "$",
+    "code": "USD",
+    "symbol_len": 1,
+    "unicode_symbol": "$",
+    "after": false
+  },
+  "hotels": [
+
+    {
+      "nearest_airport": {
+        "code": "LAX",
+        "display_priority": 1,
+        "tz_name": "America/Los_Angeles",
+        "rental_car_agencies": [
+          {
+            "website": "www.advantage.com",
+            "company": "Advantage"
+          },
+          {
+            "website": "www.alamo.com",
+            "company": "Alamo"
+          },
+          {
+            "website": "www.budget.com",
+            "company": "Budget"
+          },
+          {
+            "website": "www.dollar.com",
+            "company": "Dollar"
+          },
+          {
+            "website": "www.enterprise.com",
+            "company": "Enterprise"
+          },
+          {
+            "website": "www.hertz.com",
+            "company": "Hertz"
+          },
+          {
+            "website": "www.foxrentacar.com",
+            "company": "Fox"
+          },
+          {
+            "website": "www.paylesscarrental.com",
+            "company": "Payless"
+          },
+          {
+            "website": "www.nationalcar.com",
+            "company": "National"
+          },
+          {
+            "website": "www.thrifty.com",
+            "company": "Thrifty"
+          },
+          {
+            "website": "www.avis.com",
+            "company": "Avis"
+          }
+        ],
+        "timezone": -8,
+        "id": "504f9e4abb290e74d00005d1",
+        "location": {
+          "lat": 33.9441,
+          "lon": -118.39759
+        },
+        "local_city_id": "4da3308c2a0ceb6e9500ba83",
+        "pax_per_month": "5,307,343",
+        "transportation": "Santa Barbara Airbus",
+        "pax_per_year": "63,688,121",
+        "commercial": true,
+        "last_modified": "2019-04-19T23:24:40.290301",
+        "banner_image": "https://d174fx5zrwq6qh.cloudfront.net/station_524b04867bbecb23e5000c8e_38bf947c6194e5c57eef52daf80bb54e.jpg",
+        "address": "1 World Way, Los Angeles, CA 90045",
+        "seo_data_id": null,
+        "banner_image_alt": "Satellite image of Los Angeles International Airport (LAX)",
+        "name": "Los Angeles International",
+        "created": "2012-09-11T20:25:46.808408",
+        "url": "www.lawa.org",
+        "popularity": 98729,
+        "traveler_tips": [
+          "If you have time, have a "
+        ],
+        "marketed_city_id": "4da330d82a0ceb6e95018cea",
+        "mode": "airport",
+        "hub_airlines": [
+          "Alaska Airlines",
+          "American Airlines",
+          "Great Lakes Airlines",
+          "Horizon Air",
+          "United"
+        ],
+        "banner_image_credit": "Map Data: Google, CSUMB SFML, CA OPC, Data USGS, DigitalGlobe, U.S. Geological Survey, USDA Farm Service Agency"
+      },
+      "has_parking": false,
+      "has_free_parking": false,
+      "instant_bookable": false,
+      "city_id": "4da330d82a0ceb6e95018cea",
+      "city_hotels_page_url": "/Hotels-in-Los-Angeles-CA",
+      "wifinder": {
+        "oversized_parking_presence": false,
+        "wifi_price": null,
+        "wifi": false,
+        "currency": {
+          "symbol": "$",
+          "code": "USD",
+          "symbol_len": 1,
+          "unicode_symbol": "$",
+          "after": false
+        },
+        "parking": false,
+        "parking_price": null,
+        "currency_code": "USD"
+      },
+      "images_v2": [],
+      "currency": {
+        "symbol": "$",
+        "code": "USD",
+        "symbol_len": 1,
+        "unicode_symbol": "$",
+        "after": false
+      },
+      "is_full": false,
+      "ecstasy_factors": {},
+      "country_code": "US",
+      "city_name": "Los Angeles",
+      "state_code": "CA",
+      "id": "9259e5ea1f1ac6341b824046",
+      "has_free_wifi": false,
+      "location_url": "Los-Angeles-CA",
+      "loc": [
+        -118.30371,
+        34.05645
+      ],
+      "kind": "airbnb",
+      "page_url": "/Hotels-in-Los-Angeles-CA/Pre-Algebra-9259e5ea1f1ac6341b824046-Reviews",
+      "capacity": 2,
+      "name": "Pre-Algebra",
+      "raw_media": [
+        "https://a0.muscache.com/im/pictures/7ca54464-cbe8-47bd-9aa5-72fbeaf695bd.jpg?aki_policy=large"
+      ],
+      "has_seo_content": false,
+      "img_count": 9,
+      "raw_thumbnail": "https://a0.muscache.com/im/pictures/b4a9fee3-d9ab-4aac-bc73-6036c5925ea7.jpg?aki_policy=small",
+      "base_ecstasy": -9.363341627878384,
+      "hood_id": "50a1633966edc81e4d00110d",
+      "reviews": {
+        "count": 136,
+        "url": null,
+        "provider": "Airbnb",
+        "date": "2019-04-14T22:17:34",
+        "quality": 4.5,
+        "mean": 4.5
+      },
+      "thumbnail_url": "https://a0.muscache.com/im/pictures/b4a9fee3-d9ab-4aac-bc73-6036c5925ea7.jpg?aki_policy=small",
+      "amenities": [
+        "Kitchenette",
+        "No Smoking"
+      ],
+      "business_listing_url": null,
+      "stars": -1,
+      "name_url": "Pre-Algebra-9259e5ea1f1ac6341b824046",
+      "has_wifi": false,
+      "amens": 12288,
+      "chains": [
+        "Airbnb"
+      ],
+      "property_types": [
+        "private room"
+      ]
+    },
+    {
+      "nearest_airport": {
+        "code": "LAX",
+        "display_priority": 1,
+        "tz_name": "America/Los_Angeles",
+        "rental_car_agencies": [
+          {
+            "website": "www.advantage.com",
+            "company": "Advantage"
+          },
+          {
+            "website": "www.alamo.com",
+            "company": "Alamo"
+          },
+          {
+            "website": "www.budget.com",
+            "company": "Budget"
+          },
+          {
+            "website": "www.dollar.com",
+            "company": "Dollar"
+          },
+          {
+            "website": "www.enterprise.com",
+            "company": "Enterprise"
+          },
+          {
+            "website": "www.hertz.com",
+            "company": "Hertz"
+          },
+          {
+            "website": "www.foxrentacar.com",
+            "company": "Fox"
+          },
+          {
+            "website": "www.paylesscarrental.com",
+            "company": "Payless"
+          },
+          {
+            "website": "www.nationalcar.com",
+            "company": "National"
+          },
+          {
+            "website": "www.thrifty.com",
+            "company": "Thrifty"
+          },
+          {
+            "website": "www.avis.com",
+            "company": "Avis"
+          }
+        ],
+        "timezone": -8,
+        "id": "504f9e4abb290e74d00005d1",
+        "location": {
+          "lat": 33.9441,
+          "lon": -118.39759
+        },
+        "local_city_id": "4da3308c2a0ceb6e9500ba83",
+        "pax_per_month": "5,307,343",
+        "transportation": "Santa Barbara Airbus</a>.</p>",
+        "pax_per_year": "63,688,121",
+        "commercial": true,
+        "last_modified": "2019-04-19T23:24:40.290301",
+        "banner_image": "https://d174fx5zrwq6qh.cloudfront.net/station_524b04867bbecb23e5000c8e_38bf947c6194e5c57eef52daf80bb54e.jpg",
+        "address": "1 World Way, Los Angeles, CA 90045",
+        "seo_data_id": null,
+        "banner_image_alt": "Satellite image of Los Angeles International Airport (LAX)",
+        "name": "Los Angeles International",
+        "created": "2012-09-11T20:25:46.808408",
+        "url": "www.lawa.org",
+        "popularity": 98729,
+        "traveler_tips": [
+          "often more convenient and sometimes far less expensive."
+        ],
+        "marketed_city_id": "4da330d82a0ceb6e95018cea",
+        "mode": "airport",
+        "hub_airlines": [
+          "Alaska Airlines",
+          "American Airlines",
+          "Great Lakes Airlines",
+          "Horizon Air",
+          "United"
+        ],
+        "banner_image_credit": "Map Data: Google, CSUMB SFML, CA OPC, Data USGS, DigitalGlobe, U.S. Geological Survey, USDA Farm Service Agency"
+      },
+      "has_parking": false,
+      "has_free_parking": false,
+      "instant_bookable": false,
+      "city_id": "4da330d82a0ceb6e95018cea",
+      "city_hotels_page_url": "/Hotels-in-Los-Angeles-CA",
+      "wifinder": {
+        "oversized_parking_presence": false,
+        "wifi_price": null,
+        "wifi": false,
+        "currency": {
+          "symbol": "$",
+          "code": "USD",
+          "symbol_len": 1,
+          "unicode_symbol": "$",
+          "after": false
+        },
+        "parking": false,
+        "parking_price": null,
+        "currency_code": "USD"
+      },
+      "images_v2": [],
+      "currency": {
+        "symbol": "$",
+        "code": "USD",
+        "symbol_len": 1,
+        "unicode_symbol": "$",
+        "after": false
+      },
+      "is_full": false,
+      "ecstasy_factors": {},
+      "country_code": "US",
+      "city_name": "Los Angeles",
+      "state_code": "CA",
+      "id": "e95e9d420d6ffa6bd9a8b12c",
+      "has_free_wifi": false,
+      "location_url": "Los-Angeles-CA",
+      "loc": [
+        -118.25117,
+        34.09508
+      ],
+      "kind": "airbnb",
+      "page_url": "/Hotels-in-Los-Angeles-CA/Private-Room-Near-Silver-Lake-And-Atwater-Village-e95e9d420d6ffa6bd9a8b12c-Reviews",
+      "capacity": 1,
+      "name": "Private Room Near Silver Lake And Atwater Village",
+      "raw_media": [
+        "https://a0.muscache.com/im/pictures/4aba1edf-f1ee-4209-99ac-60b052ba73d3.jpg?aki_policy=large"
+      ],
+      "has_seo_content": false,
+      "img_count": 6,
+      "raw_thumbnail": "https://a0.muscache.com/im/pictures/d2a57e70-c650-4829-a9a7-8e545ee7266d.jpg?aki_policy=small",
+      "base_ecstasy": -9.361040176652605,
+      "hood_id": "50a1634266edc81e4d001b69",
+      "reviews": {
+        "count": 105,
+        "url": null,
+        "provider": "Airbnb",
+        "date": "2019-04-15T23:11:24",
+        "quality": 5.0,
+        "mean": 5.0
+      },
+      "thumbnail_url": "https://a0.muscache.com/im/pictures/d2a57e70-c650-4829-a9a7-8e545ee7266d.jpg?aki_policy=small",
+      "amenities": [
+        "Kitchenette",
+        "No Smoking"
+      ],
+      "business_listing_url": null,
+      "stars": -1,
+      "name_url": "Private-Room-Near-Silver-Lake-And-Atwater-Village-e95e9d420d6ffa6bd9a8b12c",
+      "has_wifi": false,
+      "amens": 12288,
+      "chains": [
+        "Airbnb"
+      ],
+      "property_types": [
+        "private room"
+      ]
+    }
+  ],
+  "amens": [
+    "Air-conditioned",
+    "Airport Shuttle",
+    "Bar or Lounge",
+    "Business Center",
+    "Casino",
+    "Child Activities",
+    "Child Care",
+    "Concierge",
+    "Fitness Center",
+    "Free Breakfast",
+    "Golf",
+    "Handicap",
+    "Kitchenette",
+    "No Smoking",
+    "Pets Allowed",
+    "Pool",
+    "Restaurant",
+    "Spa or Sauna"
+  ]
+}

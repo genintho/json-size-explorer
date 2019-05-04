@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stats distinct 1`] = `
+Array [
+  Object {
+    "count": 2,
+    "key": "a@#@7",
+    "size": 10,
+  },
+  Object {
+    "count": 1,
+    "key": "a@#@6",
+    "size": 5,
+  },
+]
+`;
