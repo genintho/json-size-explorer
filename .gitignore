@@ -10,8 +10,9 @@
 # testing
 /coverage
 
-# production
+# build is push by other means
 /build
+
 
 # misc
 .DS_Store
