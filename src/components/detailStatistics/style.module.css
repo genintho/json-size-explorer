@@ -1,0 +1,25 @@
+.statsTable {
+    width: 100%;
+}
+
+.statsTable td:nth-child(1) {
+    /*table td:nth-child(2) */
+    overflow: hidden;
+    max-width: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.statsTable th:nth-child(2),
+.statsTable td:nth-child(2),
+.statsTable th:nth-child(3),
+.statsTable td:nth-child(3) {
+    text-align: right;
+    width: 115px;
+}
+
+.statsTable th:nth-child(4),
+.statsTable td:nth-child(4) {
+    text-align: right;
+    width: 65px;
+}

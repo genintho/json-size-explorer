@@ -1,7 +1,7 @@
 import React from "react";
 
 import { HighLevelStatistic } from "./HighLevelStatistic";
-import { DetailStats } from "./DetailStats";
+import { DetailStatistics } from "./detailStatistics";
 import { Explorer } from "./explorer/";
 import { JsonDocumentStats } from "../json-size-explorer/JsonDocumentStats";
 
@@ -12,9 +12,9 @@ interface iProps {
 
 export function ResultsRoot(props: iProps) {
     return (
-        <div className="flex-row">
+        <div>
             <HighLevelStatistic jsonStats={props.jsonStats} />
-            <DetailStats jsonStats={props.jsonStats} />
+            <DetailStatistics jsonStats={props.jsonStats} />
             <Explorer jsonStats={props.jsonStats} jsonObj={props.jsonObj} />
         </div>
     );

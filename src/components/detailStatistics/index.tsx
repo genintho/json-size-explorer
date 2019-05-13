@@ -1,6 +1,7 @@
 import React from "react";
-import { thousands, limitLen } from "../uiUtils";
-import { JsonDocumentStats } from "../json-size-explorer/JsonDocumentStats";
+import { thousands } from "../../uiUtils";
+import { JsonDocumentStats } from "../../json-size-explorer/JsonDocumentStats";
+import style from "./style.module.css";
 
 interface iProps {
     jsonStats: JsonDocumentStats;
@@ -8,9 +9,9 @@ interface iProps {
 
 type tProcessor = (k: string) => (string | number)[];
 
-export function DetailStats(props: iProps) {
+export function DetailStatistics(props: iProps) {
     return (
-        <div className="flex-row">
+        <div>
             <div>
                 <h2>Keys</h2>
                 <MostFrequentKeys jsonStats={props.jsonStats} />
@@ -36,12 +37,7 @@ function MostFrequentKeys(props: iProps) {
     const stats = props.jsonStats;
     function processor(k: string) {
         const size = k.length * stats.keys[k];
-        return [
-            limitLen(k),
-            thousands(stats.keys[k]),
-            thousands(size),
-            stats.perc(size),
-        ];
+        return [k, thousands(stats.keys[k]), thousands(size), stats.perc(size)];
     }
     return (
         <KeyTable
@@ -74,7 +70,7 @@ function MostFrequentValues(props: iProps) {
     function processor(k: string) {
         const size = stats.values[k].length * k.length;
         return [
-            limitLen(k),
+            k,
             thousands(stats.values[k].length),
             thousands(size),
             stats.perc(size) + "%",
@@ -95,7 +91,7 @@ function HeaviestValues(props: iProps) {
     function processor(k: string) {
         const size = stats.values[k].length * k.length;
         return [
-            limitLen(k),
+            k,
             thousands(stats.values[k].length),
             thousands(size),
             stats.perc(size) + "%",
@@ -116,7 +112,7 @@ function MostFrequentKVDuplicates(props: iProps) {
     function processor(k: string) {
         const size = stats.keyValue[k] * (k.length - 3);
         return [
-            limitLen(k.replace("@#@", " = ")),
+            k.replace("@#@", " = "),
             thousands(stats.keyValue[k]),
             thousands(size),
             stats.perc(size) + "%",
@@ -137,7 +133,7 @@ function HeaviestKVDuplicates(props: iProps) {
     function processor(k: string) {
         const size = stats.keyValue[k] * (k.length - 3);
         return [
-            limitLen(k.replace("@#@", " = ")),
+            k.replace("@#@", " = "),
             thousands(stats.keyValue[k]),
             thousands(size),
             stats.perc(size) + "%",
@@ -161,16 +157,24 @@ function KeyTable(props: {
 }) {
     return (
         <>
-            <h3>{props.title}</h3>;
+            <h3>{props.title}</h3>
             <div className="alert alert-secondary" role="alert">
                 {props.description}
             </div>
-            <table className="table table-striped table-sm">
+            <table
+                className={[
+                    "table",
+                    "table-striped",
+                    "table-sm",
+                    "table-hover",
+                    style.statsTable,
+                ].join(" ")}
+            >
                 <thead>
                     <tr>
                         <th>Key Name</th>
                         <th>Count</th>
-                        <th>Total Size</th>
+                        <th>Size</th>
                         <th>%</th>
                     </tr>
                 </thead>

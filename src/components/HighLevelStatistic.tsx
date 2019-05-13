@@ -9,7 +9,7 @@ interface iProps {
 export function HighLevelStatistic(props: iProps) {
     const stats = props.jsonStats;
     return (
-        <div className="flex-row">
+        <div>
             <h1>Summary</h1>
             <ul>
                 <li>Total document size: {thousands(stats.totalLength)}</li>
