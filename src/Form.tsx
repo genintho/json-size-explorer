@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./Form.module.css";
 
 interface iProps {
     onSubmit: (data: string) => void;
@@ -30,42 +31,26 @@ export class Form extends React.Component<iProps, iState> {
 
     render() {
         return (
-            <div className="flex-row" id="intro">
-                <div
-                    className="card"
-                    style={{
-                        position: "absolute",
-                        left: "20%",
-                        top: "30%",
-                        width: "600px",
-                    }}
-                >
-                    <div className="card-body">
-                        <h5 className="card-title">JSON Size Explorer</h5>
-                        <p>Understand the structure of your JSON files.</p>
+            <div className={style.container}>
+                <h5 className="card-title">JSON Size Explorer</h5>
+                <p>Understand the structure of your JSON files.</p>
 
-                        <div>
-                            <h6 className="card-subtitle mb-2 text-muted">
-                                Paste
-                            </h6>
-                            <textarea
-                                id="area"
-                                cols={60}
-                                rows={10}
-                                value={this.state.value}
-                                onChange={this.handleTextAreaChange}
-                            />
-                            <br />
-                            <button
-                                id="sub"
-                                className="btn btn-info btn-sm"
-                                onClick={this.onSubmit}
-                            >
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <textarea
+                    id="area"
+                    cols={60}
+                    rows={10}
+                    value={this.state.value}
+                    onChange={this.handleTextAreaChange}
+                    className={style.textArea}
+                />
+                <br />
+                <button
+                    id="sub"
+                    className="btn btn-info btn-sm"
+                    onClick={this.onSubmit}
+                >
+                    Submit
+                </button>
             </div>
         );
     }
