@@ -32,7 +32,7 @@ export class Form extends React.Component<iProps, iState> {
     render() {
         return (
             <div className={style.container}>
-                <h5 className="card-title">JSON Size Explorer</h5>
+                <h1 className="card-title">JSON Size Explorer</h1>
                 <p>Understand the structure of your JSON files.</p>
 
                 <textarea
