@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import React from "react";
-import { Stats } from "./JsonSizeExplorer/stats";
-import { limitLen } from "./DomUtils";
+import { JsonDocumentStats } from "../../json-size-explorer/JsonDocumentStats";
+import { limitLen } from "../../uiUtils";
 import { HoverStats } from "./HoverStats";
 import style from "./Explorer.module.css";
 
@@ -10,7 +10,7 @@ type tHoverOn = (key: string) => void;
 
 interface iProps {
     jsonObj: IterableObject;
-    jsonStats: Stats;
+    jsonStats: JsonDocumentStats;
 }
 
 interface iState {
@@ -79,7 +79,7 @@ export class Explorer extends React.Component<iProps, iState> {
 
 interface iListProps {
     obj: IterableObject;
-    stats: Stats;
+    stats: JsonDocumentStats;
     toggleCollapsedKey: tToggleCollapsedKey;
     path: string[];
     expendedKeys: IterableObject;
@@ -121,7 +121,7 @@ class List extends React.Component<iListProps> {
 interface iListItemProps {
     readonly value: any;
     readonly valueFromArray: boolean;
-    readonly stats: Stats;
+    readonly stats: JsonDocumentStats;
     readonly toggleCollapsedKey: tToggleCollapsedKey;
     readonly path: string[];
     readonly expendedKeys: any;

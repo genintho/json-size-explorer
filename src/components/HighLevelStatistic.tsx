@@ -1,16 +1,16 @@
 import React from "react";
-import { thousands } from "./DomUtils";
-import { Stats } from "./JsonSizeExplorer/stats";
+import { thousands } from "../uiUtils";
+import { JsonDocumentStats } from "../json-size-explorer/JsonDocumentStats";
 
 interface iProps {
-    jsonStats: Stats;
+    jsonStats: JsonDocumentStats;
 }
 
-export function ResultSummary(props: iProps) {
+export function HighLevelStatistic(props: iProps) {
     const stats = props.jsonStats;
     return (
         <div className="flex-row">
-          <h1>Summary</h1>
+            <h1>Summary</h1>
             <ul>
                 <li>Total document size: {thousands(stats.totalLength)}</li>
                 <li>Number of keys: {thousands(stats.nbOfKey())}</li>

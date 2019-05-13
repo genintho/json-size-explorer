@@ -1,16 +1,16 @@
 import React from "react";
 import "./App.css";
-import { Form } from "./Form";
-import { ResultsRoot } from "./ResultsRoot";
-import JSONSizeExplorer from "./JsonSizeExplorer/main";
-import { Stats } from "./JsonSizeExplorer/stats";
+import { Form } from "./components/form";
+import { ResultsRoot } from "./components/ResultsRoot";
+import JSONSizeExplorer from "./json-size-explorer";
+import { JsonDocumentStats } from "./json-size-explorer/JsonDocumentStats";
 
 interface iProps {}
 
 interface iState {
     rawJsonString: string;
     jsonObj: any;
-    jsonStats: Stats;
+    jsonStats: JsonDocumentStats;
 }
 
 export class App extends React.Component<iProps, iState> {
@@ -21,7 +21,7 @@ export class App extends React.Component<iProps, iState> {
         // const testRawStr = JSON.stringify(testObj);
         const stat = testRawStr.length
             ? JSONSizeExplorer(testRawStr)
-            : new Stats(0);
+            : new JsonDocumentStats(0);
         this.state = {
             rawJsonString: testRawStr,
             // jsonObj: testObj,

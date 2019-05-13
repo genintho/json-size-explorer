@@ -1,11 +1,11 @@
 import React from "react";
-import { Stats } from "./JsonSizeExplorer/stats";
-import { limitLen, thousands } from "./DomUtils";
+import { JsonDocumentStats } from "../../json-size-explorer/JsonDocumentStats";
+import { limitLen, thousands } from "../../uiUtils";
 
 interface iProps {
     objKey: string;
     jsonObj: any;
-    jsonStats: Stats;
+    jsonStats: JsonDocumentStats;
 }
 
 export class HoverStats extends React.Component<iProps> {

@@ -1,33 +1,33 @@
 import React from "react";
-import { thousands, limitLen } from "./DomUtils";
-import { Stats } from "./JsonSizeExplorer/stats";
+import { thousands, limitLen } from "../uiUtils";
+import { JsonDocumentStats } from "../json-size-explorer/JsonDocumentStats";
 
 interface iProps {
-    jsonStats: Stats;
+    jsonStats: JsonDocumentStats;
 }
 
 type tProcessor = (k: string) => (string | number)[];
 
-export function ResultTableCount(props: iProps) {
+export function DetailStats(props: iProps) {
     return (
         <div className="flex-row">
             <div>
                 <h2>Keys</h2>
                 <MostFrequentKeys jsonStats={props.jsonStats} />
-                <HeaviestKeys jsonStats={props.jsonStats}/>
+                <HeaviestKeys jsonStats={props.jsonStats} />
             </div>
             <div>
                 <h2>Values</h2>
-              <MostFrequentValues jsonStats={props.jsonStats} />
-              <HeaviestValues jsonStats={props.jsonStats} />
+                <MostFrequentValues jsonStats={props.jsonStats} />
+                <HeaviestValues jsonStats={props.jsonStats} />
             </div>
-          <div>
             <div>
-            <h2>Duplicates</h2>
-              <MostFrequentKVDuplicates jsonStats={props.jsonStats} />
-              <HeaviestKVDuplicates jsonStats={props.jsonStats} />
+                <div>
+                    <h2>Duplicates</h2>
+                    <MostFrequentKVDuplicates jsonStats={props.jsonStats} />
+                    <HeaviestKVDuplicates jsonStats={props.jsonStats} />
+                </div>
             </div>
-          </div>
         </div>
     );
 }
@@ -91,67 +91,66 @@ function MostFrequentValues(props: iProps) {
 }
 
 function HeaviestValues(props: iProps) {
-  const stats = props.jsonStats;
-  function processor(k: string) {
-    const size = stats.values[k].length * k.length;
-    return [
-      limitLen(k),
-      thousands(stats.values[k].length),
-      thousands(size),
-      stats.perc(size) + "%",
-    ];
-  }
-  return (
-    <KeyTable
-      title="Heaviest Values"
-      description="List all the values found in the JSON and order them by how many characters are needed to store them."
-      dataProvider={stats.valuesSortedBySize.bind(stats)}
-      processor={processor}
-    />
-  );
+    const stats = props.jsonStats;
+    function processor(k: string) {
+        const size = stats.values[k].length * k.length;
+        return [
+            limitLen(k),
+            thousands(stats.values[k].length),
+            thousands(size),
+            stats.perc(size) + "%",
+        ];
+    }
+    return (
+        <KeyTable
+            title="Heaviest Values"
+            description="List all the values found in the JSON and order them by how many characters are needed to store them."
+            dataProvider={stats.valuesSortedBySize.bind(stats)}
+            processor={processor}
+        />
+    );
 }
 
 function MostFrequentKVDuplicates(props: iProps) {
-  const stats = props.jsonStats;
-  function processor(k: string) {
-    const size = stats.keyValue[k] * (k.length - 3);
-    return [
-      limitLen(k.replace("@#@", " = ")),
-      thousands(stats.keyValue[k]),
-      thousands(size),
-      stats.perc(size) + "%",
-    ];
-  }
-  return (
-    <KeyTable
-      title="Most Frequent Duplicates"
-      description="List all the tuples Key/Value found in the JSON and order them by how often we saw them."
-      dataProvider={stats.freqDupsValue.bind(stats)}
-      processor={processor}
-    />
-  );
+    const stats = props.jsonStats;
+    function processor(k: string) {
+        const size = stats.keyValue[k] * (k.length - 3);
+        return [
+            limitLen(k.replace("@#@", " = ")),
+            thousands(stats.keyValue[k]),
+            thousands(size),
+            stats.perc(size) + "%",
+        ];
+    }
+    return (
+        <KeyTable
+            title="Most Frequent Duplicates"
+            description="List all the tuples Key/Value found in the JSON and order them by how often we saw them."
+            dataProvider={stats.freqDupsValue.bind(stats)}
+            processor={processor}
+        />
+    );
 }
 
-
 function HeaviestKVDuplicates(props: iProps) {
-  const stats = props.jsonStats;
-  function processor(k: string) {
-    const size = stats.keyValue[k] * (k.length - 3);
-    return [
-      limitLen(k.replace("@#@", " = ")),
-      thousands(stats.keyValue[k]),
-      thousands(size),
-      stats.perc(size) + "%",
-    ];
-  }
-  return (
-    <KeyTable
-      title="Heaviest Duplicates"
-      description="List all the tuples Key/Value ordered by how many characters are used to store them."
-      dataProvider={stats.biggestDupsValue.bind(stats)}
-      processor={processor}
-    />
-  );
+    const stats = props.jsonStats;
+    function processor(k: string) {
+        const size = stats.keyValue[k] * (k.length - 3);
+        return [
+            limitLen(k.replace("@#@", " = ")),
+            thousands(stats.keyValue[k]),
+            thousands(size),
+            stats.perc(size) + "%",
+        ];
+    }
+    return (
+        <KeyTable
+            title="Heaviest Duplicates"
+            description="List all the tuples Key/Value ordered by how many characters are used to store them."
+            dataProvider={stats.biggestDupsValue.bind(stats)}
+            processor={processor}
+        />
+    );
 }
 
 function KeyTable(props: {

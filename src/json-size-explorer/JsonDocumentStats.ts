@@ -4,7 +4,7 @@ export interface Indexable {
 
 const TOKEN = "@#@";
 
-export class Stats {
+export class JsonDocumentStats {
     public readonly totalLength: number;
     public readonly keyValue: Indexable;
     public readonly keys: Indexable;

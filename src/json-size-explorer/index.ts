@@ -1,7 +1,7 @@
 import * as _ from "lodash";
-import { Stats, Indexable } from "./stats";
+import { JsonDocumentStats, Indexable } from "./JsonDocumentStats";
 
-function _main(obj: Indexable, stats: Stats, path: string) {
+function _main(obj: Indexable, stats: JsonDocumentStats, path: string) {
     const keys = Object.keys(obj);
 
     keys.forEach((key) => {
@@ -19,7 +19,7 @@ function _main(obj: Indexable, stats: Stats, path: string) {
 }
 
 export default function main(raw: string) {
-    const stat = new Stats(raw.length);
+    const stat = new JsonDocumentStats(raw.length);
     _main(JSON.parse(raw), stat, "");
     return stat;
 }
