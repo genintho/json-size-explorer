@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/json-size-explorer/static/css/main.f5c85510.chunk.css",
-    "main.js": "/json-size-explorer/static/js/main.671910be.chunk.js",
-    "main.js.map": "/json-size-explorer/static/js/main.671910be.chunk.js.map",
+    "main.js": "/json-size-explorer/static/js/main.2505a624.chunk.js",
+    "main.js.map": "/json-size-explorer/static/js/main.2505a624.chunk.js.map",
     "runtime~main.js": "/json-size-explorer/static/js/runtime~main.db721a0c.js",
     "runtime~main.js.map": "/json-size-explorer/static/js/runtime~main.db721a0c.js.map",
     "static/js/2.9ada8653.chunk.js": "/json-size-explorer/static/js/2.9ada8653.chunk.js",
     "static/js/2.9ada8653.chunk.js.map": "/json-size-explorer/static/js/2.9ada8653.chunk.js.map",
     "index.html": "/json-size-explorer/index.html",
-    "precache-manifest.3045358ee01fcd1b7b380bea8a9326d4.js": "/json-size-explorer/precache-manifest.3045358ee01fcd1b7b380bea8a9326d4.js",
+    "precache-manifest.7e0b2826c94918a5398d46d625971eb2.js": "/json-size-explorer/precache-manifest.7e0b2826c94918a5398d46d625971eb2.js",
     "service-worker.js": "/json-size-explorer/service-worker.js",
     "static/css/main.f5c85510.chunk.css.map": "/json-size-explorer/static/css/main.f5c85510.chunk.css.map"
   }
