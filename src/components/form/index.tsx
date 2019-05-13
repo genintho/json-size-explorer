@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./form.module.css";
+import style from "./style.module.css";
 
 interface iProps {
     onSubmit: (data: string) => void;

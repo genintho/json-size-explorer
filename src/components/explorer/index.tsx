@@ -3,7 +3,7 @@ import React from "react";
 import { JsonDocumentStats } from "../../json-size-explorer/JsonDocumentStats";
 import { limitLen } from "../../uiUtils";
 import { HoverStats } from "./HoverStats";
-import style from "./Explorer.module.css";
+import style from "./style.module.css";
 
 type tToggleCollapsedKey = (path: string[]) => void;
 type tHoverOn = (key: string) => void;
