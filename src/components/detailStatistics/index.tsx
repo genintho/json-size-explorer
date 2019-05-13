@@ -13,18 +13,18 @@ export function DetailStatistics(props: iProps) {
     return (
         <div>
             <div>
-                <h2>Keys</h2>
+                <h2 className={style.h2}>Keys</h2>
                 <MostFrequentKeys jsonStats={props.jsonStats} />
                 <HeaviestKeys jsonStats={props.jsonStats} />
             </div>
             <div>
-                <h2>Values</h2>
+                <h2 className={style.h2}>Values</h2>
                 <MostFrequentValues jsonStats={props.jsonStats} />
                 <HeaviestValues jsonStats={props.jsonStats} />
             </div>
             <div>
                 <div>
-                    <h2>Duplicates</h2>
+                    <h2 className={style.h2}>Duplicates</h2>
                     <MostFrequentKVDuplicates jsonStats={props.jsonStats} />
                     <HeaviestKVDuplicates jsonStats={props.jsonStats} />
                 </div>
@@ -157,7 +157,7 @@ function KeyTable(props: {
 }) {
     return (
         <>
-            <h3>{props.title}</h3>
+            <h3 className={style.h3}>{props.title}</h3>
             <div className="alert alert-secondary" role="alert">
                 {props.description}
             </div>

@@ -1,3 +1,10 @@
+.h2 {
+}
+
+.h3 {
+    font-style: italic;
+}
+
 .statsTable {
     width: 100%;
 }
